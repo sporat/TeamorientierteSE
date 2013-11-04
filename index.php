@@ -1,5 +1,6 @@
 <?php
     session_start();
+    session_unset();
     
     require_once("DBConnection.class.php");
     require_once("DBStatement.class.php");
@@ -17,18 +18,18 @@
 
     // Formularklassen anlegen
     $userLogin = new UserLogin();
-    //$userLogout= new UserLogout();
+    $userLogout= new UserLogout();
 
     // Verarbeitung der Benutzereingaben - Formulare überprüfen
     $userLogin->doActions();
-   // $userLogout->doActions();	
+    $userLogout->doActions();	
 
     // Sammeln der Statusmeldungen
     $statusTxt = "";
     $statusTxt .= $userLogin->getStatusText();
 
     // Erzeugen des Menüs:
-    $head ="Werkstattsteuerung";
+    $head ="test";
     $menu = new Menu();
     $leftContent = $menu->__toString();
 

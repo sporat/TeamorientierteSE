@@ -3,7 +3,7 @@ require_once("User.class.php");
 
 class UserLogin {
 
-	// Bezeichner für die Absenden-Schaltfäche
+	// Bezeichner fï¿½r die Absenden-Schaltfï¿½che
 	private $submitKey = "login"; 
 	private $pass;
 	private $login;
@@ -17,7 +17,7 @@ class UserLogin {
 			$login = $_POST["benutzer"];
 			
 			if(User::getInstance()->login($login, $pass)) {
-				
+                            $this->statusText = "yes baby der login funktioniert";
 			}else $this->statusText = "Passwort oder Benutzername falsch";
 			User::getInstance()->load($login, $pass);
 		} 

@@ -57,7 +57,9 @@ class User {
 		
 		$connect = new DBConnection();
 		$statement = new DBStatement($connect);
+                mysql_select_db('testdatenbank');
 		$query = "select * from user where username = '".$login."' and passwort = '".$pass."'";
+                
 		$statement->executeQuery($query);
 		if($row = $statement->getNextRow()) {
 			$this->loggedIn = true;
@@ -115,12 +117,12 @@ class User {
 		if($this->role_id == 3) {
 			$this->role = "Werker";
 		}	*/
-                $this->role = "Administrator";
+                $this->role = "Werker";
 		return $this->role; 
 	}
 	
 	public function getuser() {
 		return $this->user;
 	}
-	}
+    }
 ?>

@@ -15,8 +15,8 @@ class DBStatement {
 		if (is_resource($this->result)) {mysql_free_result($this->result);}
 	}
 	
-	public function executeQuery($queryStr, $values = array()) {
-		$this->result = mysql_query($this->dbConn->getConnection(), $queryStr, $values);
+	public function executeQuery($queryStr) {
+		$this->result = mysql_query($queryStr, $this->dbConn->getConnection());
 		if (is_resource($this->result)) {
 			$this->affectedRowsCount = mysql_affected_rows($this->result);
 			//$this->lastNotice = mysql_last_notice($this->dbConn->getConnection());
