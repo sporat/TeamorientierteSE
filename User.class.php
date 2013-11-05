@@ -124,5 +124,9 @@ class User {
 	public function getuser() {
 		return $this->user;
 	}
+        
+        public function test() {
+		echo "test";
+	}
     }
 ?>
