@@ -125,7 +125,7 @@ class User {
 		return $this->user;
 	}
         
-        public function test() {
+        public function test1() {
 		echo "test";
 	}
     }
