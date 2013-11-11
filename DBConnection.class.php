@@ -6,9 +6,9 @@
     */
     
     define('mysqlhost', 'localhost'); 
-    define('mysqluser', 'eule'); 
-    define('mysqlpassword', 'teamseminar'); 
-    define('mysqldatabase', 'testdatenbank');
+    define('mysqluser', 'root'); 
+    define('mysqlpassword', ''); 
+    define('mysqldatabase', 'eule');
     
     class DBConnection {
 
@@ -17,10 +17,8 @@
         public function __construct() {
             //$connStr = "'mysqlhost', 'mysqluser', 'mysqlpassword'";
             $this->connection = mysql_connect(mysqlhost, mysqluser, mysqlpassword);
+            mysql_select_db('eule');
             //mysql_select_db(mysqldatabase, mysqlhost) or die("Datenbank existiert nicht");
-            if($this->connection) {
-                echo "geht";
-            } else echo "geht nicht";
         }
         public function __destruct() {
             if (is_resource($this->connection)) {

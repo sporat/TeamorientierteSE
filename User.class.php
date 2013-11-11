@@ -6,11 +6,14 @@ require_once("DBStatement.class.php");
 class User {
 	
 	private $loggedIn;
-	private $role_id;
-	private $role;
-	private $user;
-	private $password;	
-	
+        private $benutzerid;
+        private $benutzername;
+        private $passwort;
+        private $name;
+        private $vorname;
+        private $email;
+        private $telefon;
+	private $rolle;	
 
 	// TODO hier m�ssen alle Attribute, die ein Benutzer ben�tigt, erg�nzt werden
 
@@ -57,8 +60,8 @@ class User {
 		
 		$connect = new DBConnection();
 		$statement = new DBStatement($connect);
-                mysql_select_db('testdatenbank');
-		$query = "select * from user where username = '".$login."' and passwort = '".$pass."'";
+                
+		$query = "select * from benutzer where benutzername = '".$login."' and passwort = '".$pass."'";
                 
 		$statement->executeQuery($query);
 		if($row = $statement->getNextRow()) {
@@ -73,8 +76,8 @@ class User {
 
 	public function logout() {
 		$this->loggedIn = false;
-		$this->role_id = "";
-		$this->role = "";
+		$this->rolleid = "";
+		$this->rolle = "";
 		$this->login = "";
 		
 		return $this->loggedIn;
@@ -93,13 +96,17 @@ class User {
 		$connect = new DBConnection();
 		$statement = new DBStatement($connect);
 		
-		$query = "select * from user where username = '".$login."' and passwort = '".$pass."'";
+		$query = "select * from benutzer where benutzername = '".$login."' and passwort = '".$pass."'";
 		$statement->executeQuery($query);
 			if($row = $statement->getNextRow()) {
-				$this->id = $row['mitarbeiter_id'];
-				$this->user = $row['benutzername'];
-				$this->password = $row['passwort'];
-				//$this->role_id = $row['rolle_id'];		
+				$this->benutzerid = $row['BenutzerID'];
+                                $this->benutzername = $row['Benutzername'];
+                                $this->passwort = $row['Passwort'];
+				$this->name = $row['Name'];
+				$this->vorname = $row['Vorname'];
+                                $this->email = $row['Email'];
+                                $this->telefon = $row['Telefon'];
+				$this->rolle = $row['Rolle'];
 				return true;
 			} else 
 			session_unset();
@@ -108,25 +115,28 @@ class User {
 
 	// TODO hier m�ssen die Getter und Setter der Attribute ersetzt werden
 	public function getRole() {
-		/*if($this->role_id == 1) {
-			$this->role = "Administrator";
+		if($this->rolle == "Systemadministrator") {
+			$this->rolle = "Systemadministrator";
 		}
-		if($this->role_id == 2) {
-			$this->role = "Arbeitsvorbereiter";
+		if($this->rolle == "Admin") {
+			$this->rolle = "Admin";
 		}
-		if($this->role_id == 3) {
-			$this->role = "Werker";
-		}	*/
-                $this->role = "Werker";
-		return $this->role; 
+		if($this->rolle == "Eltern") {
+			$this->rolle = "Eltern";
+		}	
+                if($this->rolle == "Lehrer") {
+			$this->rolle = "Lehrer";
+		}
+                if($this->rolle == "Klassenlehrer") {
+			$this->rolle = "Klassenlehrer";
+		}
+             
+		return $this->rolle; 
 	}
 	
 	public function getuser() {
 		return $this->user;
 	}
-        
-        public function test1() {
-		echo "test";
-	}
+ 
     }
 ?>

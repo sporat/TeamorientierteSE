@@ -1,13 +1,17 @@
 <?php
     session_start();
-    session_unset();
+    //session_unset();
     
     require_once("DBConnection.class.php");
     require_once("DBStatement.class.php");
     require_once("Menu.class.php");
+    require_once("Template.class.php");
     require_once("UserLogin.class.php");
     require_once("User.class.php");
-    require_once("Template.class.php");
+    require_once("Verwaltung.class.php");
+    require_once("UserOutline.class.php");
+    require_once("AdminAendern.class.php");
+    
    
     //require_once("UserLogout.class.php");
     //
@@ -18,18 +22,25 @@
 
     // Formularklassen anlegen
     $userLogin = new UserLogin();
-    $userLogout= new UserLogout();
+    $userLogout = new UserLogout();
+    $verwaltung = new Verwaltung();
+    $userOutline = new UserOutline();
+    $adminAendern = new AdminAendern();
+    
 
     // Verarbeitung der Benutzereingaben - Formulare überprüfen
     $userLogin->doActions();
-    $userLogout->doActions();	
+    $userLogout->doActions();
+    $verwaltung->doActions();
+    $adminAendern->doActions();    
 
     // Sammeln der Statusmeldungen
     $statusTxt = "";
     $statusTxt .= $userLogin->getStatusText();
+    $statusTxt .= $verwaltung->getStatusText();
 
     // Erzeugen des Menüs:
-    $head ="test";
+    $head ="EuLe";
     $menu = new Menu();
     $leftContent = $menu->__toString();
 
@@ -50,7 +61,52 @@
             if (!isset($_POST['login'])) {
                 $mainContent .= $userLogin->__toString();
             }
-        break; 		
+            break; 
+        case ('admin_anlegen'):
+            if (!isset($_POST['admin_anlegen'])) {
+                $mainContent .= $verwaltung->__toStringAdminAnlegen();
+            }
+            break;
+        case ('admin_aendern_liste'):
+            if (!isset($_POST['admin_aendern_liste'])) {
+                $mainContent .= $userOutline->__toString();
+            }
+            break;
+        case ('admin_aendern'):
+            if (!isset($_POST['admin_aendern'])) {
+                $mainContent .= $adminAendern->__toString();
+            }
+            break;
+        case ('admin_loeschen'):
+            if (!isset($_POST['admin_loeschen'])) {
+                
+            }
+            break;
+        case ('lehrer_anlegen'):
+            if (!isset($_POST['lehrer_anlegen'])) {
+                
+            }
+            break;
+        case ('lehrer_aendern'):
+            if (!isset($_POST['lehrer_aendern'])) {
+                
+            }
+            break;
+        case ('lehrer_loeschen'):
+            if (!isset($_POST['lehrer_loeschen'])) {
+                
+            }
+            break;
+        case ('eltern_aendern'):
+            if (!isset($_POST['eltern_aendern'])) {
+                
+            }
+            break;
+        case ('eltern_loeschen'):
+            if (!isset($_POST['eltern_loeschen'])) {
+                
+            }
+            break;      
     }
 
 
