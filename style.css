@@ -1,11 +1,17 @@
 @CHARSET "ISO-8859-1";
+
 #head {
+    
 	background-color: #FFC261;
 	font-size:28pt;
 	min-height: 80px;
 	padding: 6px;
-}
+         
 
+
+ 
+         
+} 
 #left {
 	float:left;
 	background-color: #CCB695;
@@ -16,8 +22,9 @@
 #main {
 	background-color: #FFE4BA;
 	padding: 4px;
-	min-height: 400px;
+	min-height: 600px;
 	margin-left: 308px;
+        background-image:url('http://cdn.superbwallpapers.com/wallpapers/funny/cat-riding-a-fire-breathing-unicorn-16414-400x250.jpg');
 }
 
 #status {
@@ -51,7 +58,7 @@ ul {
 
 #menue a:hover {
 	background-color: #FFCE7D;
-}
+       }
 
 h3 {
 	
