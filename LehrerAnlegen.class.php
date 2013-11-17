@@ -1,5 +1,5 @@
 <?php
-    require_once 'VerwaltungSQL.class.php';
+    require_once 'LehrerSQL.class.php';
 
 
 /**
@@ -8,9 +8,9 @@
  
  * @author Basti
  */
-class Verwaltung extends User{
+class LehrerAnlegen {
     
-    private $submitKey = "admin_anlegen_bestaetigen";
+    private $submitKey = "lehrer_anlegen_bestaetigen";
     private $statusText;
     
     	public function doActions() {
@@ -23,14 +23,16 @@ class Verwaltung extends User{
                     $email = $_POST['email'];
                     $telefon = $_POST['telefon'];
                     $raum = $_POST['raum'];
-                    $datenbank = $_POST['datenbank'];
+                    $status = $_POST['status'];
+                    //$datenbank = $_POST['datenbank'];
                     $rolle = $_POST['rolle'];
+                    $sprechstundeWochentag = $_POST['sprechstundeWochentag'];
+                    $sprechstundeUhrzeit = $_POST['sprechstundeUhrzeit'];
+                    $funktion = $_POST['funktion'];
+                    $klassenlehrer =  $_POST['klassenlehrer'];
                     
-                    $verwaltungSQL = new VerwaltungSQL();
-                    if($verwaltungSQL->anlegen($benutzername, $passwort, $name, $vorname, $email, $telefon, $raum, $rolle)) {
-                        $this->statusText = "Der Benutzer $benutzername wurde erfolgreich angelegt";
-                    } else $this->statusText = "Der Benutzer $benutzername konnte nicht angelegt werden. Bitte überprüfen sie Ihre Eingabe.";
-			
+                    $lehrerAnlegen = new LehrerSQL();
+                    $lehrerAnlegen->anlegen($benutzername, $passwort, $name, $vorname, $email, $telefon, $raum, $rolle, $sprechstundeWochentag, $sprechstundeUhrzeit, $funktion, $klassenlehrer, $status);
 		} 
 	}
         
@@ -39,7 +41,7 @@ class Verwaltung extends User{
 	}	
         
 	public function __toString() {
-		$form = new Template("AdminAnlegen.tmpl.html");
+		$form = new Template("LehrerAnlegen.tmpl.html");
 		return $form->__toString();
 				
 	}

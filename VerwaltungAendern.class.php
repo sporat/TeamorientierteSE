@@ -1,9 +1,9 @@
 <?php
-require_once("UserInfo.class.php");
+require_once("VerwaltungInfo.class.php");
 require_once("Template.class.php");
-require_once("Staff.class.php");
+//require_once("Staff.class.php");
 
-class AdminAendern {
+class VerwaltungAendern {
 
 	public static $CONTENT_ID = "adminAendern";
 	private $admin;
@@ -35,7 +35,7 @@ class AdminAendern {
 			// benötigte Werte aus $_REQUEST-Array auslesen und in lokaler Variable zwischenspeichern
 			$benutzerid = $_POST["benutzerid"];
 			$vorname = $_POST["vorname"];
-			$nachname = $_POST["nachname"];
+			$name = $_POST["name"];
 			$benutzername = $_POST["benutzername"];
 			$passwort = $_POST["passwort"];
 			$raum = $_POST["raum"];
@@ -45,15 +45,15 @@ class AdminAendern {
 			
 			// neues Model instanziieren und das Laden aus der DB verlassen. Falls dieser Artikel noch
 			// nicht vorhanden ist und das Laden fehl schlägt, Artikel neu erstellen lassen.
-			$this->admin = new UserInfo();
+			$this->admin = new VerwaltungInfo();
 				 
 			if (!$this->admin->laden($benutzerid)) {
 				
-				$this->admin = new UserInfo($benutzerid, $benutzername, $passwort, $vorname, $nachname, $email, $telefon, $raum, $rolleid);
+				$this->admin = new VerwaltungInfo($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle);
 			}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->admin->speichern($benutzerid, $benutzername, $passwort, $vorname, $nachname, $email, $telefon, $raum, $rolleid)) {
+			if ($this->admin->speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle)) {
 				// ggf. Erfolgsmeldung generieren
 				$this->statusText = "Benutzer {$benutzername} wurde erfolgreich geändert!";
 
@@ -80,7 +80,7 @@ class AdminAendern {
 		// Prüfen ob ArtikelNr zum Laden des Models übergeben wurde
 		elseif (array_key_exists("id", $_REQUEST)) {
 			// Model instanziieren und laden
-			$this->admin = new UserInfo();
+			$this->admin = new VerwaltungInfo();
 			$this->admin->laden($_REQUEST["id"]);
 		}
 	}
@@ -102,7 +102,7 @@ class AdminAendern {
 		// Daten des Models eintragen
 		$form->setValue("[benutzerid]", $this->admin->getBenutzerID());
 		$form->setValue("[vorname]", $this->admin->getVorname());
-		$form->setValue("[nachname]", $this->admin->getNachname());
+		$form->setValue("[name]", $this->admin->getName());
 		$form->setValue("[benutzername]", $this->admin->getBenutzername());
 		$form->setValue("[passwort]", $this->admin->getPasswort());
 		$form->setValue("[rolle]", $this->admin->getRolle());
@@ -112,7 +112,7 @@ class AdminAendern {
 		
 
 		// Daten zur Ausführungssteuerung übergeben
-		$form->setValue("[contentId]", UserOutline::$CONTENT_ID);
+		$form->setValue("[contentId]", VerwaltungUeberblick::$CONTENT_ID);
 		$form->setValue("[submitKey]", $this->submitKey);
 
 		// erstelltes Formular zurück geben

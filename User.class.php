@@ -3,6 +3,7 @@
 require_once("DBConnection.class.php");
 require_once("DBStatement.class.php");
 
+
 class User {
 	
 	private $loggedIn;
@@ -57,19 +58,22 @@ class User {
 	 * @return true, wenn die Anmeldung erfolgreich war, sonst false
 	 */
 	public function login($login, $pass) {
-		
-		$connect = new DBConnection();
-		$statement = new DBStatement($connect);
+            
+		$statement = new DBStatement(DBConnection::getInstance());
                 
 		$query = "select * from benutzer where benutzername = '".$login."' and passwort = '".$pass."'";
-                
-		$statement->executeQuery($query);
-		if($row = $statement->getNextRow()) {
+                   
+		if($statement->executeQuery($query)) {
+                    $this->loggedIn = true;
+                }else {
+                    $this->loggedIn = false;
+                }
+		/*if($row = $statement->getNextRow()) {
 			$this->loggedIn = true;
 		}
 		else {
 			$this->loggedIn = false;
-		}
+		}*/
 		return $this->loggedIn;
 		
 	}
@@ -93,8 +97,7 @@ class User {
 	 * @return true, wenn der Benutzer geladen werden konnte, sonst false
 	 */
 	public function load($login, $pass) {
-		$connect = new DBConnection();
-		$statement = new DBStatement($connect);
+		$statement = new DBStatement(DBConnection::getInstance());
 		
 		$query = "select * from benutzer where benutzername = '".$login."' and passwort = '".$pass."'";
 		$statement->executeQuery($query);
@@ -118,8 +121,8 @@ class User {
 		if($this->rolle == "Systemadministrator") {
 			$this->rolle = "Systemadministrator";
 		}
-		if($this->rolle == "Admin") {
-			$this->rolle = "Admin";
+		if($this->rolle == "Verwaltung") {
+			$this->rolle = "Verwaltung";
 		}
 		if($this->rolle == "Eltern") {
 			$this->rolle = "Eltern";

@@ -1,0 +1,48 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Lehrer anlegen:</legend>
+            Benutzername:<br />
+            <input type='text' name='benutzername'/><br />
+            
+            Passwort<br />
+            <input type='password' name='passwort'/><br />
+            
+            Name<br />
+            <input type='text' name='name'/><br />
+            
+            Vorname<br />
+            <input type='text' name='vorname'/><br />
+            
+            E-Mail<br />
+            <input type='text' name='email'/><br />
+            
+            Telefonnummer<br />
+            <input type='text' name='telefon'/><br />
+            
+            Raum<br />
+            <input type='text' name='raum'/><br />
+            
+            Sprechstunde Wochentag<br />
+            <input type='text' name='sprechstundeWochentag'/><br />
+            
+            Sprechstunde Uhrzeit<br />
+            <input type='text' name='sprechstundeUhrzeit'/><br />
+            
+            Funktion<br />
+            <input type='text' name='funktion'/><br />
+            
+            Status<br />
+            <input type='text' name='status'/><br />
+            
+            Klassenlehrer<br />
+            <select name="klassenlehrer" size="1">
+                <option value="1">Ja</option>
+                <option value="0">Nein</option> 
+            </select>
+            <p></p>
+            <input type='submit' name=lehrer_anlegen_bestaetigen value='Bestätigen'>
+            <input type='hidden' name = 'datenbank' value='Admin'>
+            <input type='hidden' name = 'rolle' value='Lehrer'>
+    </fieldset>
+</form>
+

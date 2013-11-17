@@ -1,28 +1,36 @@
 <?php
-class Staff {
+
+/*
+Klasse wird benötigt, um die Liste in der Klasse 'ElternUeberblick.class.php' mit den entsprechenden Werten zu befüllen
+ * Sind nur getter und setter
+  */
+class ElternEigenschaften {
 
 	// Eigenschaften der Klasse
 	protected $benutzerid;	
 	protected $benutzername;
 	protected $passwort;
 	protected $vorname;
+        protected $name;
 	protected $email;
 	protected $telefon;
-	protected $raum;
 	protected $rolleid;
         protected $rolle;
+        protected $status;
+        protected $mitteilungsweg;
 
 	// Konstruktor
-	public function __construct($benutzerid, $benutzername, $passwort, $vorname, $nachname, $email, $telefon, $raum, $rolleid) {
+	public function __construct($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $rolle, $status, $mitteilungsweg) {
 		$this->benutzerid = $benutzerid;
 		$this->benutzername = $benutzername;
 		$this->passwort = $passwort;
 		$this->vorname = $vorname;
-                $this->nachname = $nachname;
+                $this->name = $name;
 		$this->email = $email;
 		$this->telefon = $telefon;
-		$this->raum = $raum;
-		$this->rolleid = $rolleid;
+		$this->rolle = $rolle;
+                $this->status = $status;
+                $this->mitteilungsweg = $mitteilungsweg;               
 	}
 
 	public function setBenutzerID($benutzerid) {
@@ -42,7 +50,7 @@ class Staff {
 	}
 	
 	public function setPasswort($passwort) {
-		$this->plz = $passwort;
+		$this->passwort = $passwort;
 	} 
 	
 	public function getPasswort() {
@@ -65,20 +73,20 @@ class Staff {
 		return $this->email;	
 	}
 
-	public function setRolleID($rolleid) {
-		$this->rolleid = $rolleid;
+	public function setRolleID($rolle) {
+		$this->rolle = $rolle;
 	} 
 	
 	public function getRolle() {
-		$this->rolleid;
+		$this->rolle;
 
-		if($this->rolleid == 1) {
+		if($this->rolle == 1) {
 			$this->rolle = "Administrator";
 		}
-		if($this->rolleid == 2) {
+		if($this->rolle == 2) {
 			$this->rolle = "Arbeitsvorbereiter";
 		}
-		if($this->rolleid == 3) {
+		if($this->rolle == 3) {
 			$this->rolle = "Werker";
 		}	
 		return $this->rolle;
@@ -92,24 +100,31 @@ class Staff {
 		return $this->telefon;	
 	}
         
-	public function setNachname($nachname) {
-		$this->nachname = $nachname;
+	public function setName($name) {
+		$this->name = $name;
 	} 
 	
-	public function getNachname() {
-		return $this->nachname;	
+	public function getName() {
+		return $this->name;	
 	}
-
-	
-	
-	public function setRaum($raum) {
-		$this->raum = $raum;
+        
+        public function setStatus($status) {
+		$this->status = $status;
 	} 
 	
-	public function getRaum() {
-		return $this->raum;	
+	public function getStatus() {
+		return $this->status;	
 	}
-		
+        
+        public function setMitteilungsweg($mitteilungsweg) {
+		$this->mitteilungsweg = $mitteilungsweg;
+	} 
+	
+	public function getMitteilungsweg() {
+		return $this->mitteilungsweg;	
+	}
+	
+        
 	// Textuelle Repräsentation eines Objektes dieser Klasse
 	public function __toString() {
 		return $this->Name . " (Benutzer.: " . $this->benutzername . ")";

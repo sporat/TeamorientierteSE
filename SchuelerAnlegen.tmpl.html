@@ -1,0 +1,37 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Schüler anlegen:</legend>            
+            Name<br />
+            <input type='text' name='name'/><br />
+            
+            Vorname<br />
+            <input type='text' name='vorname'/><br />
+            
+            Geburtsdatum<br /> (bis jetzt noch folgendes Eingabeformat: 'YYYY-MM-DD')
+            <input type='text' name='geburtsdatum'/><br />
+            
+            Straße<br />
+            <input type='text' name='strasse'/><br />
+            
+            PLZ<br />
+            <input type='text' name='plz'/><br />
+            
+            Ort<br />
+            <input type='text' name='ort'/><br />
+                        
+            Jahrgangsstufe<br />
+            <p>
+                <select name="jahrgangsstufe" size="1">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+            </p>
+                        
+            <input type='submit' name=schueler_anlegen_bestaetigen value='Schüler anlegen'>
+            <input type='hidden' name = 'datenbank' value='Admin'>
+            <input type='hidden' name = 'lehrerID'  value='[elternID]'>
+            <input type='hidden' name = 'rolleid' value='2'>
+    </fieldset>
+</form>

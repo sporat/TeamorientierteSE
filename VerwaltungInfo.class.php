@@ -1,13 +1,13 @@
 <?php
-	require_once("Staff.class.php");
+	require_once("VerwaltungEigenschaften.class.php");
 	require_once("DBStatement.class.php");
 	require_once("DBConnection.class.php");
 	
-	class UserInfo extends Staff {
+	class VerwaltungInfo extends VerwaltungEigenschaften {
 
 		
 		// Konstruktor
-		public function __construct($benutzerid = null, $benutzername = "", $passwort ="", $vorname = "", $nachname ="", $email="", $telefon="", $raum="", $rolle = "") {
+		public function __construct($benutzerid = null, $benutzername = "", $passwort = "", $vorname = "", $nachname ="", $email="", $telefon="", $raum="", $rolle = "") {
                         $this->benutzerid = $benutzerid;
 			$this->benutzername = $benutzername;
 			$this->vorname = $vorname;
@@ -31,8 +31,8 @@
 		 * @return ob der Benutzer geladen werden konnte oder nicht
 		 */
 		public function laden($benutzerid) {
-			$connect = new DBConnection();
-			$statement = new DBStatement($connect);
+			$statement = new DBStatement(DBConnection::getInstance());
+                        
 			$statement->executeQuery("SELECT * FROM benutzer WHERE BenutzerID = $benutzerid;");
 			if ($row = $statement->getNextRow()) {
 				$this->benutzerid = $benutzerid;
@@ -41,6 +41,7 @@
 				$this->name = $row["Name"];
 				$this->email = $row["Email"];
 				$this->telefon = $row["Telefon"];
+                                $this->passwort = $row["Passwort"];
 				//$this->raum = $row["Raum"];
 				$this->rolle = $row["Rolle"];
 				
@@ -62,28 +63,24 @@
 			return $this->rolleid;
 		}*/
 		
-		public function speichern($benutzerid, $benutzername, $passwort, $vorname, $nachname, $email, $telefon, $raum, $rolleid) {			
-			$rolle_id = $this->getRole($rolleName);
+		public function speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle) {			
+			//$rolle_id = $this->getRole($rolleName);
 			
-			$connect = new DBConnection();
-			$statement = new DBStatement($connect);
+			$statement = new DBStatement(DBConnection::getInstance());
 			
 			$sql = "UPDATE "
                                     .   "`benutzer` "
                                . "SET "   
                                     .   "`Benutzername`= '$benutzername',"
                                     .   "`Passwort`= '$passwort',"
-                                    .   "`Name`= '$nachname',"
                                     .   "`Vorname`= '$vorname',"
-                                    .   "`Nachname`= '$nachname',"
+                                    .   "`Name`= '$name',"
                                     .   "`Email`= '$email',"
-                                    .   "`RolleID`= '$rolleid',"
+                                    .   "`Rolle`= '$rolle',"
                                     .   "`Telefon`= '$telefon'"
-                               . "WHERE BenutzerID = '$benutzerid'";			
-			if($statement->getAffectedRowsCount($statement->executeQuery($sql))>0)
-			return true;
-			else return false;
-			
-		}
+                               . " WHERE BenutzerID = '$benutzerid'";
+                        
+			$statement->executeQuery($sql);
+                }
 	}
 ?>

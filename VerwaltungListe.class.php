@@ -1,20 +1,20 @@
 <?php
-require_once("UserInfo.class.php");
+require_once("VerwaltungInfo.class.php");
 require_once("DBStatement.class.php");
 require_once("DBConnection.class.php");
 
-class UserList {
+class VerwaltungListe {
 	
 	private $admin;
 	
 	public function __construct() {
 		$this->admin = array();
 		
-		$connect = new DBConnection();
-		$statement = new DBStatement($connect);
-		$statement->executeQuery("SELECT BenutzerID FROM benutzer;");
+		$statement = new DBStatement(DBConnection::getInstance());
+                
+		$statement->executeQuery("SELECT BenutzerID FROM benutzer where Rolle = 'Verwaltung' order by BenutzerID ASC;");
 		while ($row = $statement->getNextRow()) {
-			$admin = new UserInfo();
+			$admin = new VerwaltungInfo();
 			$admin->laden($row["BenutzerID"]);
 			
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
