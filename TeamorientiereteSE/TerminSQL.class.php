@@ -29,7 +29,7 @@ class TerminSQL {
                 .   "klassentermin (terminid, klasseid) "
                 . "VALUES "
                 .   "($terminid,$klassenid)";  
-        print $sql;
+        
               if(  $statement->executeQuery($sql)){
                 return true;
               }

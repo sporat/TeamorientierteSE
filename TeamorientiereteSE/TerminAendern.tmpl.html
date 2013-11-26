@@ -1,0 +1,39 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Termin &auml;ndern:</legend>            
+            <div>  
+                 Terminbeschreibung<br /> 
+     
+         <textarea name="textfeld" cols="35" rows="10">[value]</textarea> 	
+      
+   </div>
+         Gibt es ein Infoschreiben?<br /> 
+            <p>
+                <select name="infoschreiben" size="1">
+                  <option value="0">nein</option>
+                  <option value="1">ja</option>
+                 
+                </select>
+            </p>
+            
+            Veranstaltungsort<br /> 
+            <input type='text' name='ort' value= '[ort]'/><br />
+            
+            Verantwortlicher<br />
+            <input type='text' name='verantwortlicher' value ='[verantwortlicher]'/><br />
+            
+            Veranstaltungsdatum<br /> Format ('YYYY-MM-DD')
+            <input type='text' name='datum' value='[datum]'/><br />
+            
+            Veranstaltungszeit<br /> Format (hh:mm:ss)
+            <input type='text' name='zeit' value='[zeit]'/><br />
+            
+            
+          
+            <input type='submit' name= 'termin_anlegen' value='Termin anlegen'>
+            <input type='hidden' name = 'contentId' value='klasse_termin'>
+            
+           
+    </fieldset>
+</form>
+
