@@ -1,8 +1,8 @@
 <?php
 
-require_once("TerminListe.class.php");
+require_once("TerminBenutzerListe.class.php");
 
-class TerminUeberblick {
+class TerminBenutzerUeberblick {
 	
 	
 	
@@ -10,7 +10,7 @@ class TerminUeberblick {
         
 	
 	public function __construct() {
-		$this->terminListe = new TerminListe();
+		$this->terminListe = new TerminBenutzerListe();
 	}
 	
 	public function __toString() {

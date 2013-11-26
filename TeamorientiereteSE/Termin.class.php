@@ -26,7 +26,7 @@ class Termin  {
 		$this->zeit = $zeit;
 		                
 	}
-        public function ladenBenutzer($terminid) {
+        public function laden($terminid) {
         $statement = new DBStatement(DBConnection::getInstance());
 
         $statement->executeQuery("SELECT * FROM termin WHERE terminid = $terminid;");

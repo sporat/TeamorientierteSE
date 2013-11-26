@@ -4,7 +4,7 @@ require_once("Termin.class.php");
 require_once("DBStatement.class.php");
 require_once("DBConnection.class.php");
 
-class TerminListe {
+class TerminBenutzerListe {
 
 	private $termin;
 	

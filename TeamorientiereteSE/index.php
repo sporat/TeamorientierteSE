@@ -43,7 +43,9 @@ require_once("FachAendern.class.php");
 require_once("FachUeberblick.class.php");
 require_once("TerminAnlegen.class.php");
 require_once("TerminKlasseZuordnung.class.php");
-require_once ("InfoAnlegen.class.php");
+require_once("InfoAnlegen.class.php");
+require_once("TerminAendern.class.php");
+require_once("TerminBenutzerUeberblick.class.php");
 
 //require_once("UserLogout.class.php");
 //
@@ -87,6 +89,9 @@ $fachUeberblick = new FachUeberblick();
 $terminAnlegen= new TerminAnlegen();
 $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
+$terminBenutzerUeberblick = new TerminBenutzerUeberblick();
+$terminAendern = new TerminAendern();
+
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 
@@ -305,6 +310,12 @@ switch ($contentId) {
          case('information_anlegen'):
         if (!isset($_POST['information_anlegen'])) {
             $mainContent .= $infoAnlegen->__toString();
+        }
+        break;
+        
+        case('termin_aendern'):
+        if (!isset($_POST['termin_aendern'])) {
+            $mainContent .= $terminAendern->__toString();
         }
         break;
 }
