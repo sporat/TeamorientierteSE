@@ -12,8 +12,8 @@ class TerminBenutzerListe {
 		$this->termin = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
-                
-		$statement->executeQuery("Select * from Termin where benutzerid=User::getInstance()->getBenutzerId()");
+                print "__";
+		$statement->executeQuery("Select * from Termin where benutzerid= ".User::getInstance()->getBenutzerId()."");
 		while ($row = $statement->getNextRow()) {
 			$termin = new Termin();
 			$termin->laden($row["terminid"]);
