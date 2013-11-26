@@ -3,7 +3,7 @@ require_once ("DBStatement.class.php");
 require_once ("DBConnection.class.php");
 class Info  {
 
-	// Eigenschaften der Klasse
+	// Eigenschaften der Klasse!!
 	protected $infoid;	
 	protected $bezeichnung;
 	protected $textfeld;
