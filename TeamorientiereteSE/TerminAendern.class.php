@@ -9,7 +9,7 @@
  
  * @author Basti
  */
-class TerminAnlegen {
+class TerminAendern {
     
     private $submitKey = "termin_aendern";
     private $statusText;
@@ -40,7 +40,7 @@ class TerminAnlegen {
                     
                     
                     $terminSQL = new TerminSQL();
-                    $_REQUEST['terminid']=$terminSQL->aendern($beschreibung, $ort, $infoschreiben, $verantwortlicher, $benutzernummer, $datum,$zeit);
+                    $_REQUEST['terminid']=$terminSQL->aendern($beschreibung, $ort, $infoschreiben, $verantwortlicher, $benutzernummer, $datum,$zeit,$terminid);
                     
 		}
                

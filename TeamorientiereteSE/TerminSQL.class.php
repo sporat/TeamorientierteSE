@@ -22,6 +22,22 @@ class TerminSQL {
          return $row['terminid'];
         
     }
+     public function aendern($beschreibung, $ort, $infoschreiben, $verantwortlicher, $benutzernummer, $datum, $uhrzeit, $terminid) {
+       
+
+        $statement = new DBStatement(DBConnection::getInstance());
+
+        $sql = "update "
+                .   "termin set BenutzerID = $benutzernummer, Beschreibung='$beschreibung', Ort= '$ort', infoschreiben ='$infoschreiben', Verantwortlicher ='$verantwortlicher', Datum='$datum', Uhrzeit='$uhrzeit', Einstellungsdatum = CURRENT_TIMESTAMP where terminid=$terminid";  
+                if($statement->executeQuery($sql)){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+         
+        
+    }
     public function terminKlasseZuordnen($terminid, $klassenid){
         $statement = new DBStatement(DBConnection::getInstance());
 
