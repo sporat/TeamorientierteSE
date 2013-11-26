@@ -1,0 +1,29 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Information anlegen:</legend>                       
+                       
+            Gültigkeitsdatum:<br /> (bis jetzt noch folgendes Eingabeformat: 'YYYY-MM-DD')
+            <input type='text' name='gültigkeitsdatum'/><br />
+            
+            Bezeichnung<br />
+            <p>
+                <select name="bezeichnung" size="1">
+                  <option value="Hausaufgabe">Hausaufgabe</option>
+                  <option value="allgemeine Informationen">Allgemeine Informationen</option>
+                  <option value="Sonstiges">Sonstiges</option>
+                </select>
+            </p>
+			<br />
+            <label for="textfeld">Text/Beschreibung:</label> <br />
+            <textarea name="textfeld" cols="40" rows="10"> 
+   Geben Sie hier die Beschreibung der Information ein.
+</textarea>   <br />             
+            
+                        
+            <input type='submit' name=InfoAnlegen value='Information Anlegen'>
+            <input type='hidden' name = 'datenbank' value='Information'>
+            <input type='hidden' name = 'benutzerID'  value='[benutzerID]'>
+            <input type='hidden' name='contentId' value='[contentId]'>
+	
+    </fieldset>
+</form>
