@@ -1,0 +1,93 @@
+@CHARSET "ISO-8859-1";
+
+#head {
+    
+	background-color: #FFC261;
+	font-size:28pt;
+	min-height: 80px;
+	padding: 6px;
+              
+} 
+#left {
+	float:left;
+	background-color: #CCB695;
+	padding: 4px;
+	width: 300px;
+        margin-top: 0px;
+}
+
+#main {
+	background-color: #FFE4BA;
+	padding: 4px;
+	min-height: 600px;
+	margin-left: 308px;
+        margin-top: 0px;
+        //background-image:url('http://cdn.superbwallpapers.com/wallpapers/funny/cat-riding-a-fire-breathing-unicorn-16414-400x250.jpg');
+}
+
+#top {
+	float:top;
+        background-color: red;
+	max-height: 150px;
+        
+}
+
+#status {
+	background-color: yellow;
+	padding: 4px;
+}
+
+ul {
+	list-style-type: circle;
+}
+	
+#menue ul {
+	list-style-type: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#menue li {
+	background-color: #CCB695;
+	border-left: 15px solid #CCB695;
+	font-weight: bold;
+}
+
+#menue a:link, #menue a:visited, #menue div {
+	display: block;
+	text-decoration: none;
+	padding: 5px;
+	color: black;
+	border-bottom: 1px solid #CCB695;
+}
+
+#menue a:hover {
+	background-color: #FFCE7D;
+}
+
+ ul#Navigation {
+    margin: 0; padding: 0.8em;
+    text-align: center;
+    border: 1px solid black;
+    background-color: silver;
+    text-decoration: none;
+    color: black;
+  }
+  ul#Navigation li {
+    list-style: none;
+    display: inline;
+    margin-bottom: 0px; 
+    padding-right: 85px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  #Navigation a:link {
+    text-decoration: none; 
+    color: black;
+    //border-bottom: 1px solid #CCB695;
+  }
+  
+
+  
+

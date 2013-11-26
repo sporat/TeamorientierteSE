@@ -1,0 +1,40 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Schülerdaten ändern:</legend>            
+            Name:<br />
+            <input type='text' name='name' value='[name]' /><br>           
+            
+            Vorname:<br />
+            <input type='text' name='vorname' value='[vorname]' /><br>
+            
+            Geburtsdatum:<br /> (bis jetzt noch folgendes Eingabeformat: 'YYYY-MM-DD')
+            <input type='text' name='geburtsdatum' value='[geburtsdatum]'/><br />
+            
+            Straße und Hausnummer:<br />
+            <input type='text' name='strasse' value='[strasse]'/><br />
+            
+            PLZ:<br />
+            <input type='text' name='plz' value='[plz]'/><br />
+            
+            Ort<br />
+            <input type='text' name='ort' value='[ort]'/><br />
+                        
+            Jahrgangsstufe<br />
+            <p>
+                <select name="jahrgangsstufe" size="1">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+            </p>
+                        
+            <input type='submit' name=bearbeitetenSchuelerBestaetigen value='Schüler aendern'>
+            <input type='hidden' name = 'datenbank' value='Admin'>
+            <input type='hidden' name = 'lehrerID'  value='[elternID]'>
+            <input type='hidden' name = 'rolleid' value='3'>
+			 <input type='hidden' name='kindid' value='[kindid]' ><br>
+	<input type='hidden' name='contentId' value='[contentId]'>
+	
+    </fieldset>
+</form>
