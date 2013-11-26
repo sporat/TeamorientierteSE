@@ -17,7 +17,7 @@ class LehrerUeberblick {
 
 		$htmlStr = "<table border='1'>";
 		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste den Benutzer aus, den Sie ändern wollen</h3>";
-		$htmlStr .= "<tr><th>MitarbeiterID</th><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>Passwort</th><th>E-Mail</th><th>Telefon</th><th>Raum</th><th>Rolle</th><th>Sprechstunde Wochentag</th><th>Sprechstunde Uhrzeit</th><th>Funktion</th><th>Klassenlehrer</th></tr>";
+		$htmlStr .= "<tr><th>LehrerID</th><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>Passwort</th><th>E-Mail</th><th>Telefon</th><th>Raum</th><th>Rolle</th><th>Sprechstunde Wochentag</th><th>Sprechstunde Uhrzeit</th><th>Funktion</th><th>Klassenlehrer</th></tr>";
 		
 		foreach ($this->lehrerListe->getLehrer() as $lehrer) {
 			$link = sprintf("<a href='index.php?contentId=lehrer_aendern&id=%s'>%s</a>", $lehrer, $lehrer);    

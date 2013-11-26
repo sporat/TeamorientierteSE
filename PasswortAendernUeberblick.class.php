@@ -1,29 +1,29 @@
 <?php
 
-require_once("VerwaltungListe.class.php");
+require_once("UserListe.class.php");
 
 class PasswortAendernUeberblick {
 	
 	public static $CONTENT_ID = "UserOutline";
 	
-	private $verwaltungListe;
+	private $userListe;
         
 	
 	public function __construct() {
-		$this->verwaltungListe = new VerwaltungListe();
+		$this->userListe = new UserListe();
 	}
 	
 	public function __toString() {
 
 		$htmlStr = "<table border='1'>";
 		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste den Benutzer aus, den Sie ändern wollen</h3>";
-		$htmlStr .= "<tr><th>MitarbeiterID</th><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>Passwort</th><th>E-Mail</th><th>Telefon</th><th>Raum</th><th>Rolle</th></tr>";
+		$htmlStr .= "<tr><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>Passwort</th><th>Rolle</th></tr>";
 		
-		foreach ($this->verwaltungListe->getAdmin() as $admin) {
+		foreach ($this->userListe->getUser() as $user) {
 			$link = sprintf("<a href='index.php?contentId=passwort_verwalten"
-				. "&id=%s'>%s</a>", $admin, $admin);                        
-			$htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
-				$link, $admin->getBenutzername(), $admin->getVorname(), $admin->getName(), $admin->getPasswort(), $admin->getEmail(), $admin->getTelefon(), $admin->getRaum(), $admin->getRolle());
+				. "&benutzername=%s'>%s</a>", $user->getBenutzername(), $user->getBenutzername());                        
+			$htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
+				$link,  $user->getVorname(), $user->getName(), $user->getPasswort(), $user->getRole());
 
                 }
 		

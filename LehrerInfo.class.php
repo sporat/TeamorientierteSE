@@ -57,6 +57,26 @@
 			}
 			return false;
 		}
+                public function load($benutzerid) {
+			$statement = new DBStatement(DBConnection::getInstance());
+                        
+			$statement->executeQuery("select benutzer.*,lehrer.Sprechstunde_Tag, lehrer.Sprechstunde_Uhrzeit, Lehrer.Raum, Lehrer.Funktion, lehrer.Klassenlehrer from lehrer left join Benutzer on lehrer.benutzerid = benutzer.benutzerID WHERE benutzer.BenutzerID = '$benutzerid';");
+			if ($row = $statement->getNextRow()) {
+				$this->benutzerid = $benutzerid;
+				$this->benutzername = $row["Benutzername"];
+				$this->vorname = $row["Vorname"];
+				$this->name = $row["Name"];
+				$this->email = $row["Email"];
+				$this->telefon = $row["Telefon"];
+                                $this->passwort = $row["Passwort"];
+				$this->raum = $row["Raum"];
+				$this->rolle = $row["Rolle"];
+                                $this->sprechstundeTag = $row["Sprechstunde_Tag"];
+                                $this->sprechstundeZeit = $row["Sprechstunde_Uhrzeit"];
+                                $this->funktion = $row["Funktion"];
+                                $this->klassenlehrer = $row["Klassenlehrer"];
+                        }
+		}
 
 		/*public function getRole($rolleName) {
 			if($rolleName == 'Administrator'){
@@ -113,7 +133,7 @@
                                     . "WHERE BenutzerID = '$benutzerid';";
                             $statement->executeQuery($query3);
                         }
-			
+			return true;
 		}
 	}
 ?>

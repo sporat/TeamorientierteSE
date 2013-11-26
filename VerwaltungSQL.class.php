@@ -9,7 +9,17 @@ require_once("DBConnection.class.php");
  */
 class VerwaltungSQL {
    
-    public function anlegen($benutzername, $passwort, $name, $vorname, $email, $telefon, $raum, $rolle) {
+    public function exists($benutzername){
+        $statement = new DBStatement(DBConnection::getInstance());
+        $query = "select * from benutzer where benutzername = '".$benutzername."'";
+        $statement->executeQuery($query);
+       if ($row = $statement->getNextRow()) {
+            return true;
+        } else {
+            return false;
+        }      
+    }
+    public function anlegen($benutzername, $passwort, $name, $vorname, $email, $telefon, $rolle) {
         $statement = new DBStatement(DBConnection::getInstance());
         $query = "Select (case when MAX(BenutzerID) is null then 1 else MAX(BenutzerID)+1 end) as BenutzerID from Benutzer";
         $statement->executeQuery($query);
@@ -35,7 +45,7 @@ class VerwaltungSQL {
         
     }
     
-    public function schuelerAnlegen($zugangsschluessel, $name, $vorname, $geburtsdatum, $strasse, $plz, $ort, $jahrgangsstufe, $klasse, $benutzerID) {
+    public function schuelerAnlegen($zugangsschluessel, $name, $vorname, $geburtsdatum, $strasse, $plz, $ort, $jahrgangsstufe, $klasse) {
         $statement = new DBStatement(DBConnection::getInstance());
         $query = "Select (case when MAX(KindID) is null then 1 else MAX(KindID)+1 end) as KindID from Kind";
         $statement->executeQuery($query);
@@ -44,9 +54,9 @@ class VerwaltungSQL {
         
         $query = "INSERT INTO "
                 .   "`kind`"
-                .       "(`KindID`, `Jahrgangsstufe`, `Name`, `Vorname`, `Geburtsdatum`, `Strasse`, `PLZ`, `Ort`, `Zugangsschluessel`, `BenutzerID`, `KlasseID`) "
+                .       "(`KindID`, `Jahrgangsstufe`, `Name`, `Vorname`, `Geburtsdatum`, `Strasse`, `PLZ`, `Ort`, `Zugangsschluessel`) "
                 . "VALUES "
-                . "     ('$id','$jahrgangsstufe','$name','$vorname','$geburtsdatum','$strasse','$plz','$ort','$zugangsschluessel','$benutzerID','$klasse')";
+                . "     ('$id','$jahrgangsstufe','$name','$vorname','$geburtsdatum','$strasse','$plz','$ort','$zugangsschluessel')";
         $statement->executeQuery($query);
     }
 }

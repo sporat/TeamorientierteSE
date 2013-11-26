@@ -33,38 +33,39 @@ class LehrerAendern {
 		if (array_key_exists($this->submitKey, $_REQUEST)) {
 			
 			// benötigte Werte aus $_REQUEST-Array auslesen und in lokaler Variable zwischenspeichern
-			$benutzerid = $_POST["benutzerid"];
-			$vorname = $_POST["vorname"];
-			$name = $_POST["name"];
-			$benutzername = $_POST["benutzername"];
-			$passwort = $_POST["passwort"];
-			$raum = $_POST["raum"];
-			$telefon = $_POST["telefon"];
-			$rolle = $_POST["rolle"];
-			$email = $_POST["email"];
-                        $sprechstundeTag = $_POST["sprechstundeTag"];
-                        $sprechstundeZeit = $_POST["sprechstundeZeit"];
-                        $funktion = $_POST["funktion"];
-                        $klassenlehrer = $_POST["klassenlehrer"];
+			$this->benutzerid = $_POST["benutzerid"];
+			$this->vorname = $_POST["vorname"];
+			$this->name = $_POST["name"];
+			$this->benutzername = $_POST["benutzername"];
+			$this->passwort = $_POST["passwort"];
+			$this->raum = $_POST["raum"];
+			$this->telefon = $_POST["telefon"];
+			$this->rolle = $_POST["rolle"];
+			$this->email = $_POST["email"];
+                        $this->sprechstundeTag = $_POST["sprechstundeTag"];
+                        $this->sprechstundeZeit = $_POST["sprechstundeZeit"];
+                        $this->funktion = $_POST["funktion"];
+                        $this->klassenlehrer = $_POST["klassenlehrer"];
 			
 			// neues Model instanziieren und das Laden aus der DB verlassen. Falls dieser Artikel noch
 			// nicht vorhanden ist und das Laden fehl schlägt, Artikel neu erstellen lassen.
 			$this->lehrer = new LehrerInfo();
 				 
-			if (!$this->lehrer->laden($benutzerid)) {
+			if (!$this->lehrer->laden($this->benutzerid)) {
 				
-				$this->lehrer = new LehrerInfo($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle, $sprechstundeTag, $sprechstundeZeit, $funktion, $klassenlehrer);
+				$this->lehrer = new LehrerInfo($this->benutzerid, $this->benutzername, $this->passwort, $this->vorname, $this->name, $this->email, $this->telefon, $this->raum, $this->rolle, $this->sprechstundeTag, $this->sprechstundeZeit, $this->funktion, $this->klassenlehrer);
 			}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->lehrer->speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle, $sprechstundeTag, $sprechstundeZeit, $funktion, $klassenlehrer)) {
+			if ($this->lehrer->speichern($this->benutzerid, $this->benutzername, $this->passwort, $this->vorname, $this->name, $this->email, $this->telefon, $this->raum, $this->rolle, $this->sprechstundeTag, $this->sprechstundeZeit, $this->funktion, $this->klassenlehrer)) 
+			{
 				// ggf. Erfolgsmeldung generieren
-				$this->statusText = "Benutzer {$benutzername} wurde erfolgreich geändert!";
+				$this->statusText = "Benutzer {$this->benutzername} wurde erfolgreich geändert!";
 
 			} else {
 
 				// ggf. Fehlermeldung generieren
-				$this->statusText = "Benutzer {$benutzername} wurde nicht erfolgreich geändert!";
+				$this->statusText = "Benutzer {$this->benutzername} wurde nicht erfolgreich geändert!";
 
 				// Erneut diese Klasse zur Anzeige verwenden
 				$_REQUEST["contentId"] = self::$CONTENT_ID;
@@ -116,7 +117,14 @@ class LehrerAendern {
                 $form->setValue("[sprechstundeTag]", $this->lehrer->getSprechstundeTag());
                 $form->setValue("[sprechstundeZeit]", $this->lehrer->getSprechstundeZeit());
                 $form->setValue("[funktion]", $this->lehrer->getFunktion());
-                $form->setValue("[klassenlehrer]", $this->lehrer->getKlassenlehrer());
+		if ($this->lehrer->getKlassenlehrer()== 0) {
+		$klassenlehrer = "nein";
+		}
+		else
+		{
+		$klassenlehrer = "ja";
+		}
+                $form->setValue("[klassenlehrer]", $klassenlehrer);
 		
 
 		// Daten zur Ausführungssteuerung übergeben

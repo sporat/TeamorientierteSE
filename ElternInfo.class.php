@@ -20,7 +20,7 @@
                         $this->mitteilungsweg = $mitteilungsweg; 
                         
 		}
-		
+
 		// Textuelle Repräsentation eines Objektes dieser Klasse
 		public function __toString() {
 			return $this->benutzerid;// . " (Benutzer: " . $this->name . "; Adresse: " . $this->adresse. "; Ort.: " . $this->ort . ";)";

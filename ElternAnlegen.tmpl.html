@@ -2,10 +2,44 @@
 
 <fieldset> 
   <legend>Eltern registrieren:</legend>
-  Benutzername: <br />
-  <input type='text' name='benutzername'/> <br/>
-  Name: <br/>
-  <input type='text' name='name'/> <br/>
-  Passwort:
+             Benutzername:<br />
+            <input type='text' name='benutzername' value='[benutzername]'/><br />
+            
+            Passwort<br />
+            <input type='password' name='passwort' value ='[passwort]'/><br />
+            
+            Name<br />
+            <input type='text' name='name' value ='[name]'/><br />
+            
+            Vorname<br />
+            <input type='text' name='vorname' value ='[vorname]'/><br />
+            
+            E-Mail<br />
+            <input type='text' name='email' value ='[email]'/><br />
+            
+            Telefonnummer<br />
+            <input type='text' name='telefon' value ='[telefon]'/><br />
+            
+            Mitteilungsweg <br/>
+            Kontaktaufnahme durch die Lehrer über
+            <select name="weg" size="1">
+                <option value="Post">den Postweg</option>
+                <option value="elektronisch">das System</option> 
+                
+            </select>
+           <br />
+            
+            Zugangsschlüssel<br />
+            Bitte geben Sie EINEN Zugangsschlüssel, den Sie von der Schule erhalten haben, an. <br/>Sollten Sie sich mehreren Kindern zuordnen
+            wollen, kann dies später im System erfolgen.
+            <br/>
+            <input type='text' name='zugangsschlüssel'/><br />
+            
+    
+            
+          
+            <input type='submit' name= eltern_registrieren_am_system value='Am System registrieren'>
+            <input type='hidden' name = 'datenbank' value='Eltern'>
+            <input type='hidden' name = 'rolle' value='Eltern'>
   
 </fieldset>

@@ -2,18 +2,35 @@
 
 	<h3>Ersetzen Sie die alten durch die neuen Daten:</h3>	
 	
-        Benutzername: <input type='text' name='benutzername' value='[benutzername]'><br>
+        Benutzername: <input type='text' name='benutzername' value='[benutzername]' readonly><br>
 	Vorname: <input type='text' name='vorname' value='[vorname]'><br>
 	Nachname: <input type='text' name='name' value='[name]'><br>
 	Passwort: <input type='text' name='passwort' value='[passwort]'><br>
         E-mail: <input type='text' name='email' value='[email]'><br>
         Telefon: <input type='text' name='telefon' value='[telefon]'><br>
         Raum: <input type='text' name='raum' value='[raum]'><br>
-	Rolle: <input type='text' name='rolle' value='[rolle]'> (Systemadministrator, Administrator, Erziehungsberechtigter, Lehrer)<br>
-        Sprechstunde Wochentag: <input type='text' name='sprechstundeTag' value='[sprechstundeTag]'><br>
-        Sprechstunde Uhrzeit: <input type='text' name='sprechstundeZeit' value='[sprechstundeZeit]'><br>
+	Rolle: <input type='text' name='rolle' value='[rolle]' readonly><br>
+        Sprechstunde <br/>
+            <select name="sprechstundeTag" size="1">
+                <option value="Montag">Montag</option>
+                <option value="Dienstag">Dienstag</option> 
+                <option value="Mittwoch">Mittwoch</option>
+                <option value="Donnerstag">Donnerstag</option> 
+                <option value="Freitag">Freitag</option>
+                 
+            </select>
+        
+            <select name="sprechstundeZeit" size="1">
+                <option value="8:00">8:00-8:45</option>
+                <option value="8:45">8:45-9:30</option> 
+                <option value="9:50">9:50-10:35</option>
+                <option value="10:35">10:35-11:20</option> 
+                <option value="11:30">11:30-12:15</option>
+                <option value="12:15">12:15-13:00</option> 
+            </select>
+           <br>
         Funktion: <input type='text' name='funktion' value='[funktion]'><br>
-        Klassenlehrer: <input type='text' name='klassenlehrer' value='[klassenlehrer]'><br>
+        Klassenlehrer: <input type='text' name='klassenlehrer' value='[klassenlehrer]' readonly><br>
         <input type='hidden' name='benutzerid' value='[benutzerid]' ><br>
 	<input type='hidden' name='contentId' value='[contentId]'>
 	<input type='submit' name='[submitKey]' value='Änderungen übernehmen'>

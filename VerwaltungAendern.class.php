@@ -38,7 +38,7 @@ class VerwaltungAendern {
 			$name = $_POST["name"];
 			$benutzername = $_POST["benutzername"];
 			$passwort = $_POST["passwort"];
-			$raum = $_POST["raum"];
+			
 			$telefon = $_POST["telefon"];
 			$rolle = $_POST["rolle"];
 			$email = $_POST["email"];		
@@ -49,22 +49,25 @@ class VerwaltungAendern {
 				 
 			if (!$this->admin->laden($benutzerid)) {
 				
-				$this->admin = new VerwaltungInfo($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle);
+				$this->admin = new VerwaltungInfo($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon,  $rolle);
 			}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->admin->speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle)) {
+                       
+			$this->admin->speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon,  $rolle);
+                         print "erfolgreich";
 				// ggf. Erfolgsmeldung generieren
-				$this->statusText = "Benutzer {$benutzername} wurde erfolgreich geändert!";
+				//$this->statusText = "Benutzer {$benutzername} wurde erfolgreich geändert!";
+                           
 
-			} else {
+			/*} else {
 
 				// ggf. Fehlermeldung generieren
 				$this->statusText = "Benutzer {$benutzername} wurde nicht erfolgreich geändert!";
 
 				// Erneut diese Klasse zur Anzeige verwenden
 				$_REQUEST["contentId"] = self::$CONTENT_ID;
-			}
+			}*/
 
 			/*
 			 * Mögliche Meldung die im Zuge der verarbeitung entstehen sollte in den Meldungspuffer
@@ -106,7 +109,7 @@ class VerwaltungAendern {
 		$form->setValue("[benutzername]", $this->admin->getBenutzername());
 		$form->setValue("[passwort]", $this->admin->getPasswort());
 		$form->setValue("[rolle]", $this->admin->getRolle());
-		$form->setValue("[raum]", $this->admin->getRaum());
+		
 		$form->setValue("[email]", $this->admin->getEmail());
 		$form->setValue("[telefon]", $this->admin->getTelefon());
 		

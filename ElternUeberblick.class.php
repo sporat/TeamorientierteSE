@@ -24,14 +24,14 @@ class ElternUeberblick {
 	public function __toString() {
                 $cID = $this->getContentID();
 		$htmlStr = "<table border='1'>";
-		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste die Eltern des Kindes aus:</h3>";
-		$htmlStr .= "<tr><th>MitarbeiterID</th><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>Passwort</th><th>E-Mail</th><th>Telefon</th><th>Rolle</th><th>Status</th><th>Mitteilungsweg</th></tr>";
+		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste die Eltern, die sie ändern wollen, aus:</h3>";
+		$htmlStr .= "<tr><th>ElternID</th><th>Benutzername</th><th>Vorname</th><th>Nachname</th><th>E-Mail</th><th>Telefon</th><th>Mitteilungsweg</th></tr>";
 		
 		foreach ($this->elternListe->getEltern() as $eltern) {
-			$link = sprintf("<a href='index.php?contentId=$cID&id=%s'>%s</a>", $eltern, $eltern);    
+			$link = sprintf("<a href='index.php?contentId=eltern_aendern&id=%s'>%s</a>", $eltern, $eltern);    
 				                     
-			$htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><<td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
-				$link, $eltern->getBenutzername(), $eltern->getVorname(), $eltern->getName(), $eltern->getPasswort(), $eltern->getEmail(), $eltern->getTelefon(), $eltern->getRolle(), $eltern->getStatus(), $eltern->getMitteilungsweg());
+			$htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
+				$link, $eltern->getBenutzername(), $eltern->getVorname(), $eltern->getName(), $eltern->getEmail(), $eltern->getTelefon(), $eltern->getMitteilungsweg());
 
                 }
 		

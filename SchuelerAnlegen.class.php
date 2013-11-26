@@ -34,11 +34,11 @@ class SchuelerAnlegen {
                     $ort = $_POST['ort'];
                     $jahrgangsstufe = $_POST['jahrgangsstufe'];
                     $klasse = $_POST['jahrgangsstufe'];  
-                    $benutzerID = $_POST['lehrerID'];  
+                    //$benutzerID = $_POST['lehrerID'];  
                     
                     
                     $verwaltungSQL = new VerwaltungSQL();
-                    $verwaltungSQL->schuelerAnlegen($zugangsschluessel, $name, $vorname, $geburtsdatum, $strasse, $plz, $ort, $jahrgangsstufe, $klasse, $benutzerID);
+                    $verwaltungSQL->schuelerAnlegen($zugangsschluessel, $name, $vorname, $geburtsdatum, $strasse, $plz, $ort, $jahrgangsstufe, $klasse);
                     
 		}
                
@@ -60,7 +60,7 @@ class SchuelerAnlegen {
 
 	public function __toString() {
                 $form = new Template("SchuelerAnlegen.tmpl.html");
-                $form->setValue("[elternID]", $this->getElternID());
+               // $form->setValue("[elternID]", $this->getElternID());
 		
 		return $form->__toString();
 				

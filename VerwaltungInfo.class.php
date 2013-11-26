@@ -63,7 +63,7 @@
 			return $this->rolleid;
 		}*/
 		
-		public function speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $raum, $rolle) {			
+		public function speichern($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $rolle) {			
 			//$rolle_id = $this->getRole($rolleName);
 			
 			$statement = new DBStatement(DBConnection::getInstance());

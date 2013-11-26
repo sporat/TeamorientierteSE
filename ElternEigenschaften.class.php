@@ -20,7 +20,7 @@ class ElternEigenschaften {
         protected $mitteilungsweg;
 
 	// Konstruktor
-	public function __construct($benutzerid, $benutzername, $passwort, $vorname, $name, $email, $telefon, $rolle, $status, $mitteilungsweg) {
+	public function __construct($benutzerid=null, $benutzername="", $passwort="", $vorname="", $name="", $email="", $telefon="", $rolle="", $status="", $mitteilungsweg="") {
 		$this->benutzerid = $benutzerid;
 		$this->benutzername = $benutzername;
 		$this->passwort = $passwort;
