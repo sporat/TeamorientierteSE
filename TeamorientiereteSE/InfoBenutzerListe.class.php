@@ -1,34 +1,36 @@
 <?php
-require_once("Termin.class.php");
+require_once("Info.class.php");
 
 require_once("DBStatement.class.php");
 require_once("DBConnection.class.php");
 
-class TerminListe {
+class InfoBenutzerListe {
 
-	private $termin;
+	private $info;
 	
 	public function __construct() {
-		$this->termin = array();
+		$this->info = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
                 
-		$statement->executeQuery("SELECT TerminID FROM termin order by TerminID ASC;");
+		$statement->executeQuery("Select * from Information where benutzerid=User::getInstance()->getBenutzerId()");
 		while ($row = $statement->getNextRow()) {
-			$termin = new Termin();
-			$termin->laden($row["TerminID"]);
+			$info = new Info();
+			$info->laden($row["infoid"]);
 			
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
-			array_push($this->termin, $termin);
+			array_push($this->info, $info);
 		}
 	}
 
-	public function getTermin() {
+	public function getInfo() {
 		// korrekter Weise müsste hier das Array noch kopiert werden
-		return $this->termin;
+		return $this->info;
                 
 	}
 	
 }
+
+
 
 
