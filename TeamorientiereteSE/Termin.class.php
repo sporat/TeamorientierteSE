@@ -32,13 +32,13 @@ class Termin  {
         $statement->executeQuery("SELECT * FROM termin WHERE terminid = $terminid;");
         if ($row = $statement->getNextRow()) {
             $this->terminid = $terminid;
-            $this->beschreibung = $row["beschreibung"];
-		$this->ort = $row["ort"];
-		$this->infoschreiben = $row["infoschreiben"];
-		$this->verantwortlicher = $row["verantwortlicher"];
-		$this->datum = $row["datum"];
-		$this->benutzernummer = $row["benutzerid"];
-		$this->zeit = $row["zeit"];
+            $this->beschreibung = $row["Beschreibung"];
+		$this->ort = $row["Ort"];
+		$this->infoschreiben = $row["Infoschreiben"];
+		$this->verantwortlicher = $row["Verantwortlicher"];
+		$this->datum = $row["Datum"];
+		$this->benutzernummer = $row["BenutzerID"];
+		$this->zeit = $row["Uhrzeit"];
 
             return true;
         }
