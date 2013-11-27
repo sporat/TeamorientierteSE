@@ -40,24 +40,24 @@
 		}
 
 				
-		public function zuKlassenleiterMachen($klasseid) {			
-			//$rolle_id = $this->getRole($rolleName);
-			
+		public function zuKlassenleiterMachen($klasseid, $benutzerid) {						
 			$statement = new DBStatement(DBConnection::getInstance());
 			
-			$sql = "UPDATE "
-                                    .   "`benutzer` "
-                               . "SET "   
-                                    .   "`Benutzername`= '$benutzername',"
-                                    .   "`Passwort`= '$passwort',"
-                                    .   "`Vorname`= '$vorname',"
-                                    .   "`Name`= '$name',"
-                                    .   "`Email`= '$email',"
-                                    .   "`Rolle`= '$rolle',"
-                                    .   "`Telefon`= '$telefon'"
-                               . " WHERE BenutzerID = '$benutzerid'";
-                        
+			$sql = "INSERT INTO `klassenlehrer`(`BenutzerID`, `KlasseID`) VALUES ('$benutzerid','$klasseid')";
 			$statement->executeQuery($sql);
+                }
+                
+                /*prüft, ob der angemeledete Klassenlehrer bereits Lehrer ist
+                 * gibt false zurück, wenn er bereits klassenleiter ist, false,wenn nicht
+                 */
+                public function KlassenleitungUeberpruefen($benutzerid) {	
+                        $statement = new DBStatement(DBConnection::getInstance());
+                        $query = "select * from klassenlehrer where benutzerid = $benutzerid";
+                        $statement->executeQuery($query);
+                        $erg = mysql_num_rows(mysql_query($query));
+                        if($erg>0) {
+                            return 0;
+                        }else return 1;
                 }
 	}
 ?>
