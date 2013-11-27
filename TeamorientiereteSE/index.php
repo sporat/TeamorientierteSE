@@ -46,6 +46,8 @@ require_once("TerminKlasseZuordnung.class.php");
 require_once ("InfoAnlegen.class.php");
 require_once ("InfoKlasseZuordnung.class.php");
 //require_once("UserLogout.class.php");
+require_once ("KlassenOhneLeiterUeberblick.class.php");
+
 //
     // Benutzer aus der Session auslesen oder neu erzeugen
 if (array_key_exists("userObj", $_SESSION)) {
@@ -87,6 +89,9 @@ $terminAnlegen= new TerminAnlegen();
 $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
 $infoKlasseZuordnung = new InfoKlasseZuordnung();
+$klassenOhneLeiterUeberblick = new KlassenOhneLeiterUeberblick();
+
+
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 
 $userLogin->doActions();
@@ -118,6 +123,8 @@ $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
 $infoKlasseZuordnung->doActions();
 //$klassenUeberblick->doActions();
+//
+//
 // Sammeln der Statusmeldungen
 $statusTxt = "";
 $statusTxt .= $userLogin->getStatusText();
@@ -311,6 +318,16 @@ switch ($contentId) {
         case('klasse_info'):
         if (!isset($_POST['Zuordnen'])) {
             $mainContent .= $infoKlasseZuordnung->__toString();
+        }
+        break;
+        case('klassen_ohne_leiter_liste'):
+        if (!isset($_POST['klassen_ohne_leiter_liste'])) {
+            $mainContent .= $klassenOhneLeiterUeberblick->__toString();
+        }
+        break;
+        case('zu_klasse_zuordnen'):
+        if (!isset($_POST['zu_klasse_zuordnen'])) {
+            $mainContent .= $klassenOhneLeiterUeberblick->doActions();
         }
         break;
 }
