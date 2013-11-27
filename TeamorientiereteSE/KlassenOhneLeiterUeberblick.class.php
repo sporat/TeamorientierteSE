@@ -1,5 +1,5 @@
 <?php
-
+//
 require_once("KlassenOhneLeiterListe.class.php");
 require_once("KlasseOhneLeiterInfo.class.php");
 

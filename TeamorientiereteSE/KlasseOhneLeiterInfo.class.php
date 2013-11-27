@@ -2,7 +2,7 @@
 	require_once("KlassenOhneLeiterEigenschaften.class.php");
 	require_once("DBStatement.class.php");
 	require_once("DBConnection.class.php");
-	
+	//
 	class KlasseOhneLeiterInfo extends KlasseOhneLeiterEigenschaften {
 
 		
