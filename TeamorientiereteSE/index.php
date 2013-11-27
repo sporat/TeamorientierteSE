@@ -3,7 +3,7 @@
 session_start();
 //session_unset();
 //var_dump(get_defined_vars());
-var_dump($_REQUEST);
+//var_dump($_REQUEST);
 header('Content-Type: text/html; charset=utf-8');
 require_once("DBConnection.class.php");
 require_once("DBStatement.class.php");
@@ -43,11 +43,11 @@ require_once("FachAendern.class.php");
 require_once("FachUeberblick.class.php");
 require_once("TerminAnlegen.class.php");
 require_once("TerminKlasseZuordnung.class.php");
-require_once ("InfoAnlegen.class.php");
-require_once ("InfoKlasseZuordnung.class.php");
-//require_once("UserLogout.class.php");
-require_once ("KlassenOhneLeiterUeberblick.class.php");
+require_once("InfoAnlegen.class.php");
+require_once("TerminAendern.class.php");
+require_once("TerminBenutzerUeberblick.class.php");
 
+//require_once("UserLogout.class.php");
 //
     // Benutzer aus der Session auslesen oder neu erzeugen
 if (array_key_exists("userObj", $_SESSION)) {
@@ -79,6 +79,7 @@ $schuelerLoeschen = new SchuelerLoeschen();
 $weitereKinderHinzufuegen = new WeitereKinderHinzufuegen();
 $lehrerLoeschen = new LehrerLoeschen();
 $elternAendern= new ElternAendern();
+$elternUeberblick = new ElternUeberblick();
 $elternUeberblickLoeschen = new ElternUeberblickLoeschen();
 $elternLoeschen = new ElternLoeschen();
 $klassenlehrerUeberblick = new Klassenlehrer_or_notUeberblick();
@@ -88,8 +89,8 @@ $fachUeberblick = new FachUeberblick();
 $terminAnlegen= new TerminAnlegen();
 $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
-$infoKlasseZuordnung = new InfoKlasseZuordnung();
-$klassenOhneLeiterUeberblick = new KlassenOhneLeiterUeberblick();
+$terminBenutzerUeberblick = new TerminBenutzerUeberblick();
+$terminAendern = new TerminAendern();
 
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
@@ -121,10 +122,8 @@ $fachAendern->doActions();
 $terminAnlegen->doActions();
 $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
-$infoKlasseZuordnung->doActions();
+$terminAendern->doActions();
 //$klassenUeberblick->doActions();
-//
-//
 // Sammeln der Statusmeldungen
 $statusTxt = "";
 $statusTxt .= $userLogin->getStatusText();
@@ -138,7 +137,6 @@ $statusTxt .= $elternLoeschen->getStatusText();
 $statusTxt .= $fachAnlegen->getStatusText();
 $statusTxt .= $fachAendern->getStatusText();
 $statusTxt .= $infoAnlegen->getStatusText();
-$statusTxt .= $infoKlasseZuordnung->getStatusText();
 // Erzeugen des Menüs:
 $head = "EuLe";
 $menu = new Menu();
@@ -315,19 +313,15 @@ switch ($contentId) {
             $mainContent .= $infoAnlegen->__toString();
         }
         break;
-        case('klasse_info'):
-        if (!isset($_POST['Zuordnen'])) {
-            $mainContent .= $infoKlasseZuordnung->__toString();
+        
+        case('termin_aendern'):
+        if (!isset($_POST['termin_aendern'])) {
+            $mainContent .= $terminBenutzerUeberblick->__toString();
         }
         break;
-        case('klassen_ohne_leiter_liste'):
-        if (!isset($_POST['klassen_ohne_leiter_liste'])) {
-            $mainContent .= $klassenOhneLeiterUeberblick->__toString();
-        }
-        break;
-        case('zu_klasse_zuordnen'):
-        if (!isset($_POST['zu_klasse_zuordnen'])) {
-            $mainContent .= $klassenOhneLeiterUeberblick->doActions();
+        case('termin_aendern_formular'):
+        if (!isset($_POST['termin_aendern_formular'])) {
+            $mainContent .= $terminAendern->__toString();
         }
         break;
 }
