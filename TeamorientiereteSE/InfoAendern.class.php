@@ -47,7 +47,7 @@ class InfoAendern {
 			//}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->schuelersafe->speichern($kindid, $name, $vorname, $geburtsdatum, $strasse, $ort, $plz, $jahrgangsstufe)) 
+			if ($this->infosafe->aendern($infoid, $name, $vorname, $geburtsdatum, $strasse, $ort, $plz, $jahrgangsstufe)) 
 			{
 				// ggf. Erfolgsmeldung generieren
 				$this->statusText = "Benutzer ('".$name."', '".$vorname."' wurde erfolgreich geändert!";
