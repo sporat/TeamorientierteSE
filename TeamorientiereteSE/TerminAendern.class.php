@@ -48,6 +48,8 @@ class TerminAendern {
 			// Model instanziieren und laden
 			$this->termin = new Termin();
 			$this->termin->laden($_REQUEST["id"]);
+                        
+                       
 		}
                
 	}
@@ -64,17 +66,17 @@ class TerminAendern {
             
                 $form = new Template("TerminAendern.tmpl.html");
                   
-		$form->setValue('value', $this->termin->getBeschreibung() );
-                          $form->setValue('[ort]', $this->termin->getOrt());
-                          $form->setValue('[datum]','test' );
-                             $form->setValue('[zeit]', $this->termin->getZeit());
-                                $form->setValue('[verantwortlicher]', $this->termin->getVerantwortlicher());
-                                if ($this->termin->getInfoschreiben()){
-                                   $form->setValue('[selected0]','selected'); 
-                                }
-                                else{
-                                $form->setValue('[selected1]','selected'); 
-                                }
+		$form->setValue('value', $this->termin->getBeschreibung());
+                $form->setValue("[ort]", $this->termin->getOrt());
+                $form->setValue("[datum]", $this->termin->getDatum() );
+                $form->setValue("[zeit]", $this->termin->getZeit());
+                $form->setValue("[verantwortlicher]", $this->termin->getVerantwortlicher());
+                if ($this->termin->getInfoschreiben()==0){
+                    $form->setValue("[selected0]",'selected'); 
+                    }
+                else{
+                    $form->setValue("[selected1]",'selected'); 
+                    }
 		return $form->__toString();
 				
 		
