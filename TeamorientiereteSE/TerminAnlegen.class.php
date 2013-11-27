@@ -47,7 +47,7 @@ class TerminAnlegen {
 
 	public function __toString() {
             
-                $form = new Template("TerminAnlegen.tmpl.html");
+                $form = new Template("Terminanlegen.tmpl.html");
                   
 		
 		return $form->__toString();

@@ -3,7 +3,7 @@
     require_once ("SchuelerSQL.class.php");
 
 
-/**
+/**adsfdfgsdfgg
  * 
  Hier wird behandelt, wie sich Eltern am System registrieren können
  

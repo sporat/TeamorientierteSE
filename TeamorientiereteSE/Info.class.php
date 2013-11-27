@@ -8,17 +8,17 @@ class Info  {
 	protected $bezeichnung;
 	protected $textfeld;
 	protected $gültigkeitsdatum;
-        protected $benutzerID;
-	protected $einstellungsdatum;
+    protected $benutzerID;
+	
 
 	// Konstruktor
-	public function __construct($infoid = null, $bezeichnung= "", $textfeld= "", $gültigkeitsdatum="", $benutzerID=null, $einstellungsdatum = "") {
+	public function __construct($infoid = null, $bezeichnung= "", $textfeld= "", $gültigkeitsdatum="", $benutzerID=null) {
 		$this->infoid = $infoid;
 		$this->bezeichnung = $bezeichnung;
 		$this->textfeld = $textfeld;
 		$this->gültigkeitsdatum = $gültigkeitsdatum;
 		$this->benutzerID = $benutzerID;
-		$this->einstellungsdatum = $einstellungsdatum;
+		
                 
 	}
 
@@ -61,13 +61,7 @@ class Info  {
 	public function getBenutzerID() {
 		return $this->benutzerID;	
 	}
-public function setEinstellungsdatum($einstellungsdatum) {
-		$this->einstellungsdatum = $einstellungsdatum;
-	} 
-	
-	public function getEinstellungsdatum() {
-		return $this->einstellungsdatum;	
-	}
+
 	
 		
 	// Textuelle Repräsentation eines Objektes dieser Klasse

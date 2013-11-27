@@ -8,13 +8,13 @@ class InfoAendern {
 
 	public static $CONTENT_ID = "infoAendern";
 	private $information;
+        private $infosql;
 	private $statusText;
-	private $submitKey = "InfoAendern";
+	private $submitKey = "bearbeitetenInfoBestaetigen";
 	private $infoid;
 	private $bezeichnung;
 	private $benutzerid;
 	private $gültigkeitsdatum;
-        private $infosafe;
 	
 	public function getInfo() {
 		return $this->information;
@@ -39,7 +39,7 @@ class InfoAendern {
 			// neues Model instanziieren und das Laden aus der DB verlassen. Falls dieser Artikel noch
 			// nicht vorhanden ist und das Laden fehl schlägt, Artikel neu erstellen lassen.
 			$this->information = new Info();
-                        $this->infosafe = new InfoSQL();
+                        $this->schuelersafe = new SchuelerSQL();
 				 
 			//if (!$this->schueler->laden($kindid)) {
 				
@@ -47,7 +47,7 @@ class InfoAendern {
 			//}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->infosafe->aendern($infoid, $name, $vorname, $geburtsdatum, $strasse, $ort, $plz, $jahrgangsstufe)) 
+			if ($this->schuelersafe->speichern($kindid, $name, $vorname, $geburtsdatum, $strasse, $ort, $plz, $jahrgangsstufe)) 
 			{
 				// ggf. Erfolgsmeldung generieren
 				$this->statusText = "Benutzer ('".$name."', '".$vorname."' wurde erfolgreich geändert!";
@@ -105,7 +105,7 @@ class InfoAendern {
 		$form->setValue("[jahrgangsstufe]", $this->schueler->getJahrgangsstufe());
 		
 		// Daten zur Ausführungssteuerung übergeben
-		$form->setValue("[contentId]", "info_aendern");
+		$form->setValue("[contentId]", SchuelerUeberblick::$CONTENT_ID);
 		$form->setValue("[submitKey]", $this->submitKey);
 
 		// erstelltes Formular zurück geben

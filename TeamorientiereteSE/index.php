@@ -3,7 +3,7 @@
 session_start();
 //session_unset();
 //var_dump(get_defined_vars());
-//var_dump($_REQUEST);
+var_dump($_REQUEST);
 header('Content-Type: text/html; charset=utf-8');
 require_once("DBConnection.class.php");
 require_once("DBStatement.class.php");
@@ -43,10 +43,8 @@ require_once("FachAendern.class.php");
 require_once("FachUeberblick.class.php");
 require_once("TerminAnlegen.class.php");
 require_once("TerminKlasseZuordnung.class.php");
-require_once("InfoAnlegen.class.php");
-require_once("TerminAendern.class.php");
-require_once("TerminBenutzerUeberblick.class.php");
-
+require_once ("InfoAnlegen.class.php");
+require_once ("InfoKlasseZuordnung.class.php");
 //require_once("UserLogout.class.php");
 //
     // Benutzer aus der Session auslesen oder neu erzeugen
@@ -79,7 +77,6 @@ $schuelerLoeschen = new SchuelerLoeschen();
 $weitereKinderHinzufuegen = new WeitereKinderHinzufuegen();
 $lehrerLoeschen = new LehrerLoeschen();
 $elternAendern= new ElternAendern();
-$elternUeberblick = new ElternUeberblick();
 $elternUeberblickLoeschen = new ElternUeberblickLoeschen();
 $elternLoeschen = new ElternLoeschen();
 $klassenlehrerUeberblick = new Klassenlehrer_or_notUeberblick();
@@ -89,10 +86,7 @@ $fachUeberblick = new FachUeberblick();
 $terminAnlegen= new TerminAnlegen();
 $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
-$terminBenutzerUeberblick = new TerminBenutzerUeberblick();
-$terminAendern = new TerminAendern();
-
-
+$infoKlasseZuordnung = new InfoKlasseZuordnung();
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 
 $userLogin->doActions();
@@ -122,6 +116,7 @@ $fachAendern->doActions();
 $terminAnlegen->doActions();
 $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
+$infoKlasseZuordnung->doActions();
 //$klassenUeberblick->doActions();
 // Sammeln der Statusmeldungen
 $statusTxt = "";
@@ -136,6 +131,7 @@ $statusTxt .= $elternLoeschen->getStatusText();
 $statusTxt .= $fachAnlegen->getStatusText();
 $statusTxt .= $fachAendern->getStatusText();
 $statusTxt .= $infoAnlegen->getStatusText();
+$statusTxt .= $infoKlasseZuordnung->getStatusText();
 // Erzeugen des Menüs:
 $head = "EuLe";
 $menu = new Menu();
@@ -312,10 +308,9 @@ switch ($contentId) {
             $mainContent .= $infoAnlegen->__toString();
         }
         break;
-        
-        case('termin_aendern'):
-        if (!isset($_POST['termin_aendern'])) {
-            $mainContent .= $terminAendern->__toString();
+        case('klasse_info'):
+        if (!isset($_POST['Zuordnen'])) {
+            $mainContent .= $infoKlasseZuordnung->__toString();
         }
         break;
 }
