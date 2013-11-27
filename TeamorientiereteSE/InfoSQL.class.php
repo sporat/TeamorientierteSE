@@ -1,6 +1,7 @@
 <?php
 
 require_once("DBConnection.class.php");
+require_once("Info.class.php");
 
 class InfoSQL extends Info {
   public function infoKlasseZuordnen($terminid, $klassenid)
