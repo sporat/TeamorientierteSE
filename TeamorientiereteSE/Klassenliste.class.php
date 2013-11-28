@@ -12,19 +12,13 @@ class KlassenListe {
 		$this->klasse = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
-                $sql="SELECT KlasseID FROM Klasse";
-		$statement->executeQuery($sql);
+                
+		$statement->executeQuery("SELECT KlasseID FROM Klasse");
 		while ($row = $statement->getNextRow()) {
                         $klassenclass = new Klasse();
 			$klasseid=$row['KlasseID'];
                         $klassenclass->load($klasseid);
-                        
-                     
-                     
-                     
-			
-			
-			
+                       
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
 			array_push($this->klasse, $klassenclass);
 		}

@@ -3,7 +3,7 @@ require_once 'InfoSQL.class.php';
 class InfoKlasseZuordnung {
 
     private $submitKey = 'infoKlasse';
-    private $submitKey2 = "GesamteSchule2";
+    private $submitKey2 = "GesamteSchule";
     private $infoId;
     private $statusText;
     public function doActions() {
@@ -11,7 +11,7 @@ class InfoKlasseZuordnung {
         // Prüfen ob das Formular dieser Sicht übergeben wurde
         if (array_key_exists($this->submitKey, $_REQUEST)) {
            
-            $infoid = $_REQUEST['infoid'];
+            $terminid = $_REQUEST['infoid'];
             $_REQUEST['infoid'] = $infoid;
 
 
@@ -26,16 +26,13 @@ class InfoKlasseZuordnung {
 
                     $infosql = new InfoSQL();
 
-                    if($infosql->infoKlasseZuordnen($infoid, $v))
-                    {
-                        $this->statusText="Termin wurde für ausgewählte Klassen angelegt";
-                    }
+                    $infosql->infoKlasseZuordnen($infoid, $v);
                 }
             } else {
                 
                 $i = 0;
                 $contentId = "klasse_info";
-                $this->statusText = "Sie haben keine Klasse ausgewählt!";
+                $this->statusTxt = "Sie haben keine Klasse ausgewählt!";
                 print $this->__toString();
             }
         }
@@ -45,10 +42,7 @@ class InfoKlasseZuordnung {
             $_REQUEST['infoid'] = $infoid;
             $infosql = new InfoSQL();
             $klassenid = 'null';
-            if($infosql->infoKlasseZuordnen($infoid, $klassenid))
-            {
-                $this->statusText = "Information wurde erfolgreich als Schultermin angelegt.";
-            }
+            $infosql->infoKlasseZuordnen($infoid, $klassenid);
         }
     }
 

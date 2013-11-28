@@ -66,8 +66,8 @@ class Termin  {
 		return $this->infoschreiben;	
 	}
 	
-	public function getOrt() {
-		return $this->ort;	
+	public function getStrasse() {
+		return $this->strasse;	
 	}
 
 	public function getDatum() {

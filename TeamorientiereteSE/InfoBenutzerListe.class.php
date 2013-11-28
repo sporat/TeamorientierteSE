@@ -1,6 +1,5 @@
 <?php
 require_once("Info.class.php");
-
 require_once("DBStatement.class.php");
 require_once("DBConnection.class.php");
 
@@ -12,11 +11,13 @@ class InfoBenutzerListe {
 		$this->info = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
-                
-		$statement->executeQuery("Select * from Information where benutzerid=User::getInstance()->getBenutzerId()");
+                $benutzerid = User::getInstance()->getBenutzerId();
+           $query = "Select * from Information where benutzerid= $benutzerid";
+        		$statement->executeQuery($query);
 		while ($row = $statement->getNextRow()) {
-			$info = new Info();
-			$info->laden($row["infoid"]);
+			$info = new InfoSQL();
+                        $infoid = $row["InfoID"];
+                        $info->laden($infoid);
 			
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
 			array_push($this->info, $info);

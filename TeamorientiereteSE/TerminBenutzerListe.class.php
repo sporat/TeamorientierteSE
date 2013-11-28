@@ -12,12 +12,7 @@ class TerminBenutzerListe {
 		$this->termin = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
-                if(User::getInstance()->getBenutzerId()){
-                $benutzerid= User::getInstance()->getBenutzerId();}
-                else{
-                    $benutzerid=1;
-                    
-                }
+                $benutzerid= User::getInstance()->getBenutzerId();
 		$statement->executeQuery("Select * from Termin where benutzerid= ".$benutzerid."");
 		while ($row = $statement->getNextRow()) {
 			$termin = new Termin();
@@ -26,8 +21,6 @@ class TerminBenutzerListe {
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
 			array_push($this->termin, $termin);
 		}
-                
-                
 	}
 
 	public function getTermin() {

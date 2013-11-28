@@ -27,7 +27,7 @@ class SchuelerUeberblick {
                 }
 		
 		$htmlStr .= "</table>";
-                print "HAllo";
+      
 		return $htmlStr;
 	}
 
