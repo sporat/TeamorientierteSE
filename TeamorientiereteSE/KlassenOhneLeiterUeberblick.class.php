@@ -23,7 +23,8 @@ class KlassenOhneLeiterUeberblick {
 	public function __toString() {
                 $klassenOhneLeiterInfo = new KlasseOhneLeiterInfo();
                 $klassenleiter = $klassenOhneLeiterInfo->KlassenleitungUeberpruefen(User::getInstance()->getBenutzerId());
-                if($klassenleiter = 1) {
+                
+                if($klassenleiter == 1) {
                 
 		$htmlStr = "<table border='1'>";
 		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste die Klasse aus, der Sie sich zuordnen möchten:</h3>";
@@ -40,7 +41,7 @@ class KlassenOhneLeiterUeberblick {
 		$htmlStr .= "</table>";
 
 		return $htmlStr;
-                } else return "bereits klassenleiter";   
+                } else return "Sie sind bereits Klassenleiter";   
 	}
 
 }

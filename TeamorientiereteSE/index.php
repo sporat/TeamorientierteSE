@@ -50,6 +50,8 @@ require_once("TerminBenutzerUeberblick.class.php");
 require_once("TerminKlasseZuordnungAendern.class.php");
 require_once("TerminUeberblickLoeschen.class.php");
 require_once("TerminLoeschen.class.php");
+require_once("KlassenOhneLeiterUeberblick.class.php");
+require_once("SchuelerOhneKlasseUeberblick.class.php");
 
 //require_once("UserLogout.class.php");
 //
@@ -98,10 +100,11 @@ $terminAendern = new TerminAendern();
 $terminKlasseZuordnungAendern = new TerminKlasseZuordnungAendern();
 $terminUeberblickLoeschen = new TerminUeberblickLoeschen();
 $terminLoeschen = new TerminLoeschen();
+$klasseOhneLeiterUeberblick = new KlassenOhneLeiterUeberblick();
+$schuelerOhneKlasseUeberblick = new SchuelerOhneKlasseUeberblick();
 
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
-
 $userLogin->doActions();
 $userLogout->doActions();
 $verwaltung->doActions();
@@ -131,8 +134,9 @@ $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
 $terminAendern->doActions();
 $terminKlasseZuordnungAendern->doActions();
-
 $terminLoeschen->doActions();
+$schuelerOhneKlasseUeberblick->doActions();
+
 // Sammeln der Statusmeldungen
 $statusTxt = "";
 $statusTxt .= $userLogin->getStatusText();
@@ -147,6 +151,7 @@ $statusTxt .= $fachAnlegen->getStatusText();
 $statusTxt .= $fachAendern->getStatusText();
 $statusTxt .= $infoAnlegen->getStatusText();
 $statusTxt .= $terminLoeschen->getStatusText();
+
 // Erzeugen des Menüs:
 $head = "EuLe";
 $menu = new Menu();
@@ -339,9 +344,24 @@ switch ($contentId) {
             $mainContent .= $terminKlasseZuordnungAendern->__toString();
         }
         break;
-         case('termin_loeschen'):            
+        case('termin_loeschen'):            
         if (!isset($_POST['termin_loeschen'])) {
             $mainContent .= $terminUeberblickLoeschen->__toString();
+        }
+        break;
+        case('klassen_ohne_leiter_liste'):            
+        if (!isset($_POST['klassen_ohne_leiter_liste'])) {
+            $mainContent .= $klasseOhneLeiterUeberblick->__toString();
+        }
+        break;
+        case('zu_klasse_zuordnen'):            
+        if (!isset($_POST['zu_klasse_zuordnen'])) {
+            $mainContent .= $klasseOhneLeiterUeberblick->doActions();
+        }
+        break;
+        case('schueler_ohne_klasse_liste'):            
+        if (!isset($_POST['schueler_ohne_klasse_liste'])) {
+            $mainContent .= $schuelerOhneKlasseUeberblick->__toString();
         }
         break;
 }
