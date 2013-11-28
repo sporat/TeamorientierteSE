@@ -3,7 +3,8 @@
 session_start();
 //session_unset();
 //var_dump(get_defined_vars());
-//var_dump($_REQUEST);
+var_dump($_REQUEST);
+
 header('Content-Type: text/html; charset=utf-8');
 require_once("DBConnection.class.php");
 require_once("DBStatement.class.php");
@@ -46,6 +47,7 @@ require_once("TerminKlasseZuordnung.class.php");
 require_once("InfoAnlegen.class.php");
 require_once("TerminAendern.class.php");
 require_once("TerminBenutzerUeberblick.class.php");
+require_once("TerminKlasseZuordnungAendern.class.php");
 
 //require_once("UserLogout.class.php");
 //
@@ -91,6 +93,7 @@ $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
 $terminBenutzerUeberblick = new TerminBenutzerUeberblick();
 $terminAendern = new TerminAendern();
+$terminKlasseZuordnungAendern = new TerminKlasseZuordnungAendern();
 
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
@@ -123,7 +126,7 @@ $terminAnlegen->doActions();
 $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
 $terminAendern->doActions();
-//$klassenUeberblick->doActions();
+$terminKlasseZuordnungAendern->doActions();
 // Sammeln der Statusmeldungen
 $statusTxt = "";
 $statusTxt .= $userLogin->getStatusText();
@@ -322,6 +325,11 @@ switch ($contentId) {
         case('termin_aendern_formular'):
         if (!isset($_POST['termin_aendern_formular'])) {
             $mainContent .= $terminAendern->__toString();
+        }
+        break;
+        case('termin_aendern_klasse'):
+        if (!isset($_POST['termin_aendern_klasse'])) {
+            $mainContent .= $terminKlasseZuordnungAendern->__toString();
         }
         break;
 }
