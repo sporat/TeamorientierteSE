@@ -1,37 +1,39 @@
 <?php
 
-require_once("SchuelerListe.class.php");
-
+require_once("TerminBenutzerListe.class.php");
 
 class TerminUeberblickLoeschen {
 	
-	public static $CONTENT_ID = "SchuelerUeberblickLoeschen";
-	private $submitKey = "schueler_auswaehlen";
-	private $schuelerListe;
-        public $checkbox;
-        public $i;
-	public $kinder;
-	public $statusTxt;
+        
 	
 	public function __construct() {
-		$this->schuelerListe = new SchuelerListe();
+		$this->terminListe = new TerminBenutzerListe();
 	}
+        public static $CONTENT_ID = "TerminUeberblickLoeschen";
+	private $submitKey = "termin_auswaehlen";
+	private $terminListe;
+        public $checkbox;
+        public $i;
+	public $termin;
+	public $statusTxt;
+	
+	
 	public function getStatusText()
 	{
 	return $this->statusTxt;
 	}
 	public function doActions() {
-$this->kinder = array(); 
+$this->termin = array(); 
 //array_push($this->kinder, $kind);
 		// Prüfen ob das Formular dieser Sicht übergeben wurde
 		if (array_key_exists($this->submitKey, $_REQUEST)) {
 		
-		if (isset($_REQUEST['KindDel'])) 
+		if (isset($_REQUEST['TerminDel'])) 
 		{
-			reset($_REQUEST['KindDel']);
+			reset($_REQUEST['TerminDel']);
 			$i=0;
 			$kind="";
-			foreach ($_REQUEST['KindDel'] as $k => $v) 
+			foreach ($_REQUEST['TerminDel'] as $k => $v) 
 			//$k: Stelle im Array (beginnend mit 0); 
 			//$v: Value an der Stelle --> KindId zum Löschen des Kindes
 				{
@@ -45,44 +47,45 @@ $this->kinder = array();
 				}
 			$_REQUEST['anzahl']=$i;
 			//$_REQUEST['kindarr[]']=$_REQUEST['KindDel'];
-			$_REQUEST['kinder']= $kind;
-		$schuelerLoeschen = new SchuelerLoeschen();
-		print $schuelerLoeschen->__toString();	
+			$_REQUEST['termin']= $termin;
+		$terminLoeschen = new TerminLoeschen();
+		print $terminLoeschen->__toString();	
 		} 
 		else 
 		{
 			$i=0;
-			$contentId="schueler_loeschen";
-			$this->statusTxt = "Sie haben keine Schüler ausgewählt!";
+			$contentId="termin_loeschen";
+			$this->statusTxt = "Sie haben keine Termine ausgewählt!";
 			return $this->__toString();
 		}
 		                           
                 }	
 	}
 
+	
 	public function __toString() {
                 $i = 0;
 				$checkbox ="";
 					$htmlStr ="";
-					
-		foreach ($this->schuelerListe->getSchueler() as $schueler) {
-					//$link = sprintf("<a href='index.php?contentId=lehrer_aendern &id=%s'>%s</a>", $lehrer, $lehrer);
-                    $form = new Template("SchuelerUeberblickLoeschen.tmpl.html"); 
-                    $kindid = $schueler->getKindId();
-                    $checkbox .= "<input type='checkbox' name='KindDel[]' value='$kindid'>";
+                $form = new Template("TerminUeberblickLoeschen.tmpl.html"); 
+               
+                foreach ($this->terminListe->getTermin() as $termin) {
+                    $terminid = $termin->getTerminId();
+                    $checkbox .= "<input type='checkbox' name='TerminDel[]' value='$terminid'>";
                    
-                    $htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
-					"<input type='checkbox' name='KindDel[]' value='$kindid'>", $schueler->getName(), $schueler->getVorname(), $schueler->getGeburtsdatum(), $schueler->getJahrgangsstufe(), $schueler->getStrasse(), $schueler->getPLZ(), $schueler->getOrt());
+                    $htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
+					"<input type='checkbox' name='TerminDel[]' value='$terminid'>", $termin->getTerminid(), $termin->getBeschreibung(),  $termin->getDatum(), $termin->getZeit(), $termin->getOrt(), $termin->getVerantwortlicher());
 
                     // Daten des Models eintragen
                     $form->setValue("[htmlStr]", $htmlStr);
-                    $form->setValue("[checkbox]", $checkbox);
-				
-                }
-			
-                // erstelltes Formular zurück geben
-            return $form->__toString();
-        }
+                    
+		
+
+		
+		$htmlStr .= "</table>";
+              
+		return $htmlStr;
+	}
 
 }
-
+}

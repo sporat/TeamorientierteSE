@@ -58,7 +58,7 @@
                 $menu .= "				<ul>";
                 $menu .= "					<li><a href='index.php?contentId=termin_anlegen'>Termin anlegen</a></li>";
                 $menu .= "					<li><a href='index.php?contentId=termin_aendern'>Termin &auml;ndern</a></li>";
-                $menu .= "					<li><a href='index.php?contentId=termin_l&ouml;schen'>Termin l&ouml;schen</a></li>";
+                $menu .= "					<li><a href='index.php?contentId=termin_loeschen'>Termin l&ouml;schen</a></li>";
                 $menu .= "					<li><a href='index.php?contentId=termin_einsehen'>Termin einsehen</a></li>";
                 $menu .= "				</ul>";   
                 $menu .= "                              <ul>";               
@@ -181,6 +181,7 @@
                 $menu .= "                              <li>F&auml;cher- und Klassenverwaltung";
                 $menu .= "				<ul>";
                 $menu .= "					<li><a href='index.php?contentId=klasse_erstellen'>Klasse anlegen</a></li>";
+                $menu .= "                                      <li><a href='index.php?contentId=klassen_ohne_leiter_liste'>Zuordnung zu einer Klasse</a></li>";
                 $menu .= "					<li><a href='index.php?contentId=klasse_aendern'>Klasse &auml;ndern</a></li>";
                 $menu .= "					<li><a href='index.php?contentId=schueler_zu_klasse_erstellen'>Sch&uuml;ler-Klasse-Zuordnung erstellen</a></li>";
                 $menu .= "					<li><a href='index.php?contentId=schueler_zu_klasse_l&ouml;schen'>Sch&uuml;ler-Klasse-Zuordnung l&ouml;schen</a></li>";

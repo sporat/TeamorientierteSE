@@ -17,10 +17,10 @@ class TerminBenutzerUeberblick {
 
 		$htmlStr = "<table border='1'>";
 		$htmlStr .= "<h3>Wählen Sie aus der unteren Liste den Termin aus, den Sie &auml;ndern wollen</h3>";
-		$htmlStr .= "<tr><th>TerminID</th><th>Datum</th><th>Beschreibung</th></tr>";
+		$htmlStr .= "<tr><th>&Auml;ndern</th><th>TerminID</th><th>Datum</th><th>Beschreibung</th></tr>";
 		
 		foreach ($this->terminListe->getTermin() as $termin) {
-			$link = sprintf("<a href='index.php?contentId=termin_aendern&id=%s'>%s</a>", $termin->getTerminId(), $termin->getTerminId());                        
+			$link = sprintf("<a href='index.php?contentId=termin_aendern_formular&id=%s'>%s</a>", $termin->getTerminId(), $termin->getTerminId());                        
 			$htmlStr .= sprintf("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", 
 				$link, $termin->getTerminID(), $termin->getDatum(), $termin->getBeschreibung());
 

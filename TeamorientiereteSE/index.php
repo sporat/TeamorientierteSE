@@ -3,7 +3,8 @@
 session_start();
 //session_unset();
 //var_dump(get_defined_vars());
-//var_dump($_REQUEST);
+var_dump($_REQUEST);
+
 header('Content-Type: text/html; charset=utf-8');
 require_once("DBConnection.class.php");
 require_once("DBStatement.class.php");
@@ -46,9 +47,10 @@ require_once("TerminKlasseZuordnung.class.php");
 require_once("InfoAnlegen.class.php");
 require_once("TerminAendern.class.php");
 require_once("TerminBenutzerUeberblick.class.php");
-require_once("InfoAendern.class.php");
-require_once("InfoKlasseZuordnung.class.php");
-require_once ("InfoBenutzerUeberblick.class.php");
+require_once("TerminKlasseZuordnungAendern.class.php");
+require_once("TerminUeberblickLoeschen.class.php");
+require_once("TerminLoeschen.class.php");
+
 //require_once("UserLogout.class.php");
 //
     // Benutzer aus der Session auslesen oder neu erzeugen
@@ -93,9 +95,11 @@ $terminKlasseZuordnung = new TerminKlasseZuordnung();
 $infoAnlegen = new InfoAnlegen();
 $terminBenutzerUeberblick = new TerminBenutzerUeberblick();
 $terminAendern = new TerminAendern();
-$infoAendern = new InfoAendern();
-$infoKlasseZuordnung = new InfoKlasseZuordnung();
-$infoBenutzerUeberblick = new InfoBenutzerUeberblick();
+$terminKlasseZuordnungAendern = new TerminKlasseZuordnungAendern();
+$terminUeberblickLoeschen = new TerminUeberblickLoeschen();
+$terminLoeschen = new TerminLoeschen();
+
+
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 
 $userLogin->doActions();
@@ -125,9 +129,10 @@ $fachAendern->doActions();
 $terminAnlegen->doActions();
 $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
-$infoAendern->doActions();
-$infoKlasseZuordnung->doActions();
-//$klassenUeberblick->doActions();
+$terminAendern->doActions();
+$terminKlasseZuordnungAendern->doActions();
+
+$terminLoeschen->doActions();
 // Sammeln der Statusmeldungen
 $statusTxt = "";
 $statusTxt .= $userLogin->getStatusText();
@@ -141,8 +146,7 @@ $statusTxt .= $elternLoeschen->getStatusText();
 $statusTxt .= $fachAnlegen->getStatusText();
 $statusTxt .= $fachAendern->getStatusText();
 $statusTxt .= $infoAnlegen->getStatusText();
-$statusTxt .= $infoAendern->getStatusText();
-$statusTxt .= $infoKlasseZuordnung->getStatusText();
+$statusTxt .= $terminLoeschen->getStatusText();
 // Erzeugen des Menüs:
 $head = "EuLe";
 $menu = new Menu();
@@ -169,7 +173,6 @@ switch ($contentId) {
             $mainContent .= $userLogin->__toString();
         }
         break;
-    
     case ('admin_anlegen'):
         if (!isset($_POST['admin_anlegen'])) {
             $mainContent .= $verwaltung->__toString();
@@ -290,7 +293,7 @@ switch ($contentId) {
             $mainContent .= $schuelerUeberblickLoeschen->__toString();
         }
         break;
-      /*case('wkinder_zuordnen'):
+      /*    case('wkinder_zuordnen'):
         if (!isset($_POST['wkinder_zuordnen'])) {
             $mainContent .= $weitereKinderHinzufuegen->__toString();
         }*/
@@ -310,23 +313,12 @@ switch ($contentId) {
             $mainContent .= $terminAnlegen->__toString();
         }
         break;
-    case('klasse_termin'):
+        case('klasse_termin'):
         if (!isset($_POST['Zuordnen'])) {
             $mainContent .= $terminKlasseZuordnung->__toString();
         }
         break;
-   case('klasse_info'):
-        if (!isset($_POST['Zuordnen'])) {
-            $mainContent .= $infoKlasseZuordnung->__toString();
-        }
-        break;
-    case ('klasse_info_checked'):
-        if (!isset($_POST['Zuordnung'])) {
-// siehe --TosTring von KlassenueberblickInfoAendern            
-//$mainContent .= $infoUeberblickTerminAendern->__toString();
-        }
-        break;
-    case('information_anlegen'):
+         case('information_anlegen'):
         if (!isset($_POST['information_anlegen'])) {
             $mainContent .= $infoAnlegen->__toString();
         }
@@ -334,21 +326,24 @@ switch ($contentId) {
         
         case('termin_aendern'):
         if (!isset($_POST['termin_aendern'])) {
+            $mainContent .= $terminBenutzerUeberblick->__toString();
+        }
+        break;
+        case('termin_aendern_formular'):
+        if (!isset($_POST['termin_aendern_formular'])) {
             $mainContent .= $terminAendern->__toString();
         }
         break;
-    
-   case('information_aendern_formular'):
-        if (!isset($_POST['information_aendern_formular'])) {
-            $mainContent.= $infoAendern->__toString();
+        case('termin_aendern_klasse'):
+        if (!isset($_POST['termin_aendern_klasse'])) {
+            $mainContent .= $terminKlasseZuordnungAendern->__toString();
         }
         break;
-    case ('information_aendern'):
-        if(!isset($_POST['information_aendern']))  {
-           $mainContent .= $infoBenutzerUeberblick->__toString();
-        }    
+         case('termin_loeschen'):            
+        if (!isset($_POST['termin_loeschen'])) {
+            $mainContent .= $terminUeberblickLoeschen->__toString();
+        }
         break;
-    
 }
 
 

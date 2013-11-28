@@ -29,15 +29,49 @@ class TerminSQL {
 
         $sql = "update "
                 .   "termin set BenutzerID = $benutzernummer, Beschreibung='$beschreibung', Ort= '$ort', infoschreiben ='$infoschreiben', Verantwortlicher ='$verantwortlicher', Datum='$datum', Uhrzeit='$uhrzeit', Einstellungsdatum = CURRENT_TIMESTAMP where terminid=$terminid";  
+        print $sql;
                 if($statement->executeQuery($sql)){
                     return true;
                 }
                 else{
                     return false;
                 }
-         
+     }
+       public function existsSchultermin ($terminid){
+            $statement = new DBStatement(DBConnection::getInstance());
+
+        $sql = "select klasseid from klassentermin where terminid = ".$terminid." ";
+             $statement->executeQuery($sql);
+        
+           $row=$statement->getNextRow();
+               if($row['klasseid']==NULL){
+                   return true;
+               }
+               else{
+                   return false;
+               }
+           
         
     }
+       
+      
+        public function terminKlasseCheck($terminid, $klassenid){
+            $statement = new DBStatement(DBConnection::getInstance());
+
+        $sql = "select klasseid from klassentermin where terminid = ".$terminid." and klasseid= ".$klassenid."";
+             $statement->executeQuery($sql);
+        
+              if( $row=$statement->getNextRow()){
+                return true;
+              }
+              else 
+              {
+                  return false;
+              }
+        }
+         
+        
+    
     public function terminKlasseZuordnen($terminid, $klassenid){
         $statement = new DBStatement(DBConnection::getInstance());
 
@@ -54,6 +88,33 @@ class TerminSQL {
                   return false;
               }
         
+    }
+    public function deleteTerminKlasseZuordnung($terminid){
+          $statement = new DBStatement(DBConnection::getInstance());
+
+        $sql = "Delete from Klassentermin where terminid= ".$terminid.""; 
+        
+              if(  $statement->executeQuery($sql)){
+                return true;
+              }
+              else 
+              {
+                  return false;
+              }
+    }
+    public function TerminLoeschen($terminid){
+        
+          $statement = new DBStatement(DBConnection::getInstance());
+
+        $sql = "Delete from Termin where terminid= ".$terminid.""; 
+        
+              if(  $statement->executeQuery($sql)){
+                return true;
+              }
+              else 
+              {
+                  return false;
+              }
     }
 
     

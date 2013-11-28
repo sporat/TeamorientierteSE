@@ -1,35 +1,36 @@
 <?php
 
-require_once("SchuelerSQL.class.php");
+require_once("TerminSQL.class.php");
 
 class TerminLoeschen {
 	
-	public static $CONTENT_ID = "SchuelerLoeschen";
-	private $submitKey = "schueler_loeschen"; 
+	public static $CONTENT_ID = "TerminLoeschen";
+	private $submitKey = "termin_loeschen"; 
 	private $formular;
 	private $statusTxt;
-	private $kinder;
+	private $termin;
 	
 	
 	public function doActions() {
 $statusTxt = "";
 
 		// Prüfen ob das Formular dieser Sicht übergeben wurde
-		if (array_key_exists("schueler_loeschen", $_POST)) {
+		if (array_key_exists("termin_loeschen", $_POST)) {
 		
-		$schuelerSQL = new SchuelerSQL();
-		$this->kinder = $_REQUEST["kinder"];
+		$terminSQL = new TerminSQL();
+		$this->termin = $_REQUEST["termin"];
 		
-		$kinddelete = explode(",", $this->kinder);
+		$termindelete = explode(",", $this->termin);
 
 			for ($i=0; $i < $_REQUEST["anzahl"]; $i++) 
 			
 				{
-                    $v=$kinddelete[$i];
+                    $v=$termindelete[$i];
 					
-					$schuelerSQL->SchuelerLoeschen($v);
+					$terminSQL->TerminLoeschen($v);
+                                        $terminSQL->deleteTerminKlasseZuordnung($v);
 				}
-			$this->statusTxt .= "Ausgewählte Schüler wurden erfolgreich gelöscht";
+			$this->statusTxt .= "Ausgewählte Termine wurden erfolgreich gelöscht";
 		} 
 		
 					
@@ -49,13 +50,12 @@ $statusTxt = "";
 		return $this->formular;
 	}
 	public function __toString() {		
-                    $form = new Template("Zustimmung.tmpl.html"); 
+                    $form = new Template("ZustimmungTermin.tmpl.html"); 
 				$form->setValue("[Anz]", $_REQUEST["anzahl"]);
-				$form->setValue("[Kind]", $_REQUEST["kinder"]);
+				$form->setValue("[termin]", $_REQUEST["termin"]);
 				$form->setValue("[anzahl]", $_REQUEST["anzahl"]);
-				$form->setValue("[kinder]", $_REQUEST["kinder"]);
+				$form->setValue("[termin]", $_REQUEST["termin"]);
                 return $form->__toString();
         }
 
 }
-
