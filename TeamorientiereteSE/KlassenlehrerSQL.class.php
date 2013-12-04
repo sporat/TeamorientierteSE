@@ -40,4 +40,11 @@ class KlassenlehrerSQL {
         $query = "UPDATE Kind SET KlasseID = $klasseid WHERE KindID = $kindid";
         $statement->executeQuery($query);
     }
+    
+    public function SchuelerKlassenzuordnungLoeschen($kindid) {
+            
+        $statement = new DBStatement(DBConnection::getInstance());
+        $query = "UPDATE Kind SET KlasseID = NULL WHERE KindID = $kindid";
+        $statement->executeQuery($query);
+    }
 }

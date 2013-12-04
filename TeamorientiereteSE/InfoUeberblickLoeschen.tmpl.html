@@ -1,0 +1,15 @@
+<form method=post action=index.php>
+    <fieldset>
+        <table border='1'>
+            <h3>Wählen Sie aus der unteren Liste die Informationen aus, die Sie loeschen wollen</h3>
+			<tr><th>Loeschen</th><th>InfoID</th><th>Bezeichnung</th><th>Text</th><th>Erstellungsdatum</th><th>Gültigkeitsdatum</th><th>BenutzerID</th></tr>
+            [htmlStr]
+        </table>
+        <input type='submit' name=info_auswaehlen value='L&ouml;schen'>	
+	<input type='hidden' name ='contentId' value='info_loeschen'>
+        <input type='hidden' name='anzahl' value='[anzahl]'>
+	<input type='hidden' name='info' value='[info]'>
+        
+
+    </fieldset>
+</form>

@@ -1,0 +1,38 @@
+<form method=post action=index.php>
+    <fieldset>
+        <legend>Neue Nachricht erstellen:</legend>
+           
+       
+            
+            Betreff <br/>
+            <select name="betreff" size="1">
+                <option value="Problem">Problem</option>
+                <option value="Sprechstunde">Sprechstunde</option> 
+                <option value="Telefonat">Telefonat</option>
+                <option value="sonstiges">Sonstiges</option> 
+                
+                 
+            </select>
+            Betreffzusatz <br>
+            <input type= 'text' name='betreffzusatz'/>
+            
+            
+            <div>  
+                 Nachrichtentext<br /> 
+     
+         <textarea name="textfeld" cols="100" rows="100"></textarea> 	
+      
+   </div>
+           
+           
+            
+    
+            
+          
+           
+            <input type='submit' name=absenden value='Nachricht absenden'>
+            <input type='hidden' name = 'benutzerid' value='[benutzerid]'>
+            
+    </fieldset>
+</form>
+

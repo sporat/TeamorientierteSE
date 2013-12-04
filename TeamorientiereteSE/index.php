@@ -52,6 +52,22 @@ require_once("TerminUeberblickLoeschen.class.php");
 require_once("TerminLoeschen.class.php");
 require_once("KlassenOhneLeiterUeberblick.class.php");
 require_once("SchuelerOhneKlasseUeberblick.class.php");
+require_once("SchuelerDesKlassenlehrersUeberblick.class.php");
+require_once("KlassenlehrerUeberblick.class.php");
+require_once("SchuelerueberblickLoeschen.class.php");
+require_once("LehrerSuche.class.php");
+require_once ("InfoAendern.class.php");
+require_once ("InfoBenutzerUeberblick.class.php");
+require_once ("InfoKlasseZuordnungAendern.class.php");
+require_once ("InfoKlasseZuordnung.class.php");
+require_once ("InfoUeberblickLoeschen.class.php");
+require_once ("InfoLoeschen.class.php");
+require_once ("DokumenteHochladen.class.php");
+require_once ("DokumentUeberblick.class.php");
+require_once ("LehrerFachZuordnungUeberblick.class.php");
+require_once ("LehrerFachZuordnungLoeschenUeberblick.class.php");
+require_once ("MitteilungswegAendern.class.php");
+require_once ("SchuelerImportieren.class.php");
 
 //require_once("UserLogout.class.php");
 //
@@ -100,9 +116,24 @@ $terminAendern = new TerminAendern();
 $terminKlasseZuordnungAendern = new TerminKlasseZuordnungAendern();
 $terminUeberblickLoeschen = new TerminUeberblickLoeschen();
 $terminLoeschen = new TerminLoeschen();
+$infoAendern = new InfoAendern();
+$infoBenutzerUeberblick = new InfoBenutzerUeberblick();
+$infoKlasseZuordnung = new InfoKlasseZuordnung();
+$infoKlasseZuordnungAendern = new InfoKlasseZuordnungAendern();
+$infoUeberblickLoeschen = new InfoUeberblickLoeschen();
+$infoLoeschen = new InfoLoeschen();
+$dokumenteHochladen = new DokumenteHochladen();
+$dokumentUeberblick = new DokumentUeberblick();
+$lehrerFachZuordnungUeberblick = new LehrerFachZuordnungUeberblick();
+$lehrerFachZuordnungLoeschenUeberblick =new LehrerFachZuordnungLoeschenUeberblick();
+$mitteilungswegAendern = new MitteilungswegAendern();
+$schuelerImportieren = new SchuelerImportieren();
 $klasseOhneLeiterUeberblick = new KlassenOhneLeiterUeberblick();
 $schuelerOhneKlasseUeberblick = new SchuelerOhneKlasseUeberblick();
-
+$schuelerDesKlassenlehrers = new SchuelerDesKlassenLehrersUeberblick();
+$klassenlehrerUeberblickListe = new KlassenlehrerUeberblick();
+$schuelerUeberblickLoeschen = new SchuelerUeberblickLoeschen();
+$lehrerSuche = new LehrerSuche();
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 $userLogin->doActions();
@@ -134,8 +165,20 @@ $terminKlasseZuordnung->doActions();
 $infoAnlegen->doActions();
 $terminAendern->doActions();
 $terminKlasseZuordnungAendern->doActions();
+$terminUeberblickLoeschen->doActions();
 $terminLoeschen->doActions();
+$infoKlasseZuordnung->doActions();
+$infoAendern->doActions();
+$infoKlasseZuordnungAendern->doActions();
+$infoLoeschen->doActions();
+$infoUeberblickLoeschen->doActions();
+$dokumenteHochladen->doAction();
+$lehrerFachZuordnungUeberblick->doActions();
+$lehrerFachZuordnungLoeschenUeberblick->doActions();
+$mitteilungswegAendern->doActions();
+$schuelerImportieren->doActions();
 $schuelerOhneKlasseUeberblick->doActions();
+$schuelerDesKlassenlehrers->doActions();
 
 // Sammeln der Statusmeldungen
 $statusTxt = "";
@@ -151,6 +194,12 @@ $statusTxt .= $fachAnlegen->getStatusText();
 $statusTxt .= $fachAendern->getStatusText();
 $statusTxt .= $infoAnlegen->getStatusText();
 $statusTxt .= $terminLoeschen->getStatusText();
+$statusTxt .= $infoLoeschen->getStatusText();
+$statusTxt .= $dokumenteHochladen->getStatusText();
+$statusTxt .= $lehrerFachZuordnungUeberblick->getStatusText();
+$statusTxt .= $lehrerFachZuordnungLoeschenUeberblick->getStatusText();
+$statusTxt .= $mitteilungswegAendern->getStatusText();
+$statusTxt .= $schuelerImportieren->getStatusText();
 
 // Erzeugen des Menüs:
 $head = "EuLe";
@@ -298,10 +347,10 @@ switch ($contentId) {
             $mainContent .= $schuelerUeberblickLoeschen->__toString();
         }
         break;
-      /*    case('wkinder_zuordnen'):
+        case('wkinder_zuordnen'):
         if (!isset($_POST['wkinder_zuordnen'])) {
             $mainContent .= $weitereKinderHinzufuegen->__toString();
-        }*/
+        }
         break;
         case('lehrer_zu_klassenlehrer'):
         if (!isset($_POST['klassenlehrer_aendern'])) {
@@ -323,6 +372,11 @@ switch ($contentId) {
             $mainContent .= $terminKlasseZuordnung->__toString();
         }
         break;
+	case('klasse_info'):
+        if (!isset($_POST['Zuordnen'])) {
+            $mainContent .= $infoKlasseZuordnung->__toString();
+        }
+        break;
          case('information_anlegen'):
         if (!isset($_POST['information_anlegen'])) {
             $mainContent .= $infoAnlegen->__toString();
@@ -334,9 +388,19 @@ switch ($contentId) {
             $mainContent .= $terminBenutzerUeberblick->__toString();
         }
         break;
+	case('information_aendern'):
+        if (!isset($_POST['information_aendern'])) {
+            $mainContent .= $infoBenutzerUeberblick->__toString();
+        }
+        break;
         case('termin_aendern_formular'):
         if (!isset($_POST['termin_aendern_formular'])) {
             $mainContent .= $terminAendern->__toString();
+        }
+        break;
+	case('information_aendern_formular'):
+        if (!isset($_POST['info_aendern_formular'])) {
+            $mainContent .= $infoAendern->__toString();
         }
         break;
         case('termin_aendern_klasse'):
@@ -344,9 +408,55 @@ switch ($contentId) {
             $mainContent .= $terminKlasseZuordnungAendern->__toString();
         }
         break;
+	case('info_aendern_klasse'):
+        if (!isset($_POST['info_aendern_klasse'])) {
+            $mainContent .= $infoKlasseZuordnungAendern->__toString();
+        }
+        break;
         case('termin_loeschen'):            
         if (!isset($_POST['termin_loeschen'])) {
             $mainContent .= $terminUeberblickLoeschen->__toString();
+        }
+        break;
+	case('information_loeschen'):            
+        if (!isset($_POST['information_loeschen'])) {
+            $mainContent .= $infoUeberblickLoeschen->__toString();
+}
+        break;
+        case('info_loeschen'):            
+        if (!isset($_POST['Loeschen'])) {
+            $mainContent .= $infoLoeschen->__toString();
+        }
+        break;
+    case ('dokumente_hochladen'):
+        if (!isset($_POST['dokumente_hochladen'])) {
+            $mainContent .= $dokumenteHochladen->__toString();
+        }
+        break;
+    case ('dokumente_herunterladen'):
+        if(!isset($_POST['dokumente_herunterladen'])) {
+            $mainContent .= $dokumentUeberblick->__toString();
+        }
+        break;
+
+        case ('zuordnung_fach_erstellen'):
+        if(!isset($_POST['zuordnung_fach_erstellen'])) {
+            $mainContent .= $lehrerFachZuordnungUeberblick->__toString();
+        }
+        break;
+        case ('zuordnung_fach_loeschen'):
+        if(!isset($_POST['zuordnung_fach_loeschen'])) {
+            $mainContent .= $lehrerFachZuordnungLoeschenUeberblick->__toString();
+        }
+        break;
+        case ('mitteilungsweg_aendern'):
+        if(!isset($_POST['mitteilungsweg_aendern'])) {
+            $mainContent .= $mitteilungswegAendern->__toString();
+        }
+        break;
+        case ('schueler_importieren'):
+        if(!isset($_POST['schueler_importieren'])) {
+            $mainContent .= $schuelerImportieren->__toString();
         }
         break;
         case('klassen_ohne_leiter_liste'):            
@@ -362,6 +472,33 @@ switch ($contentId) {
         case('schueler_ohne_klasse_liste'):            
         if (!isset($_POST['schueler_ohne_klasse_liste'])) {
             $mainContent .= $schuelerOhneKlasseUeberblick->__toString();
+        }
+        break;
+        
+        case('klassenlehrer_liste'):            
+        if (!isset($_POST['klassenlehrer_liste'])) {
+            $mainContent .= $klassenlehrerUeberblickListe->__toString();
+        }
+        break;
+        
+        case('systemadministrator_klassen_ohne_leiter_liste'):            
+        if (!isset($_POST['klassen_ohne_leiter_liste'])) {
+            $mainContent .= $klasseOhneLeiterUeberblick->__toString();
+        }
+        break;
+        case('schueler_zu_klasse_erstellen'):            
+        if (!isset($_POST['schueler_zu_klasse_erstellen'])) {
+            $mainContent .= $schuelerOhneKlasseUeberblick->__toString();
+        }
+        break;
+        case('schueler_zu_klasse_loeschen'):            
+        if (!isset($_POST['schueler_zu_klasse_loeschen'])) {
+            $mainContent .= $schuelerDesKlassenlehrers->__toString();
+        }
+        break;
+        case('suche'):            
+        if (!isset($_POST['suche'])) {
+            $mainContent .= $lehrerSuche->__toString();
         }
         break;
 }

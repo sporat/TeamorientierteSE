@@ -1,0 +1,17 @@
+<form method=post action=index.php enctype="multipart/form-data">
+    <fieldset>
+        <legend>Sch&uuml;lerdaten importieren</legend>
+        Beachten Sie: Ein Import ist nur über eine csv-Datei möglicht. <br>
+        Die Datei muss die Daten in folgender Reihenfolge beinhalten: <br>
+        Name; Vorname; Jahrgangsstufe; Stra&szlig;e; PLZ; Ort; Geburtsdatum <br>
+        Ein neuer Datensatz muss durch eine neue Zeile , ein neues Element muss mit ";" in der Datei gekennzeichnet werden. <br>
+  
+        Wählen Sie die gew&uuml;nschte csv-Datei f&uuml;r den Datenimport aus.<br>
+       
+          <input type='file' name='dok' ><br>
+          <input type='hidden' name='MAX_FILE_SIZE' value='500000000'/>
+          <input type='submit' name=datenImportieren value='Daten importieren'>
+            
+	
+    </fieldset>
+</form>
