@@ -68,6 +68,9 @@ require_once ("LehrerFachZuordnungUeberblick.class.php");
 require_once ("LehrerFachZuordnungLoeschenUeberblick.class.php");
 require_once ("MitteilungswegAendern.class.php");
 require_once ("SchuelerImportieren.class.php");
+require_once ("Infoleiste.class.php");
+require_once ("Suche.class.php");
+require_once ("SucheLehrerUeberblick.class.php");
 
 //require_once("UserLogout.class.php");
 //
@@ -134,6 +137,8 @@ $schuelerDesKlassenlehrers = new SchuelerDesKlassenLehrersUeberblick();
 $klassenlehrerUeberblickListe = new KlassenlehrerUeberblick();
 $schuelerUeberblickLoeschen = new SchuelerUeberblickLoeschen();
 $lehrerSuche = new LehrerSuche();
+$suche = new Suche();
+$sucheLehrerUeberblick = new SucheLehrerUeberblick();
 
 // Verarbeitung der Benutzereingaben - Formulare überprüfen
 $userLogin->doActions();
@@ -179,6 +184,7 @@ $mitteilungswegAendern->doActions();
 $schuelerImportieren->doActions();
 $schuelerOhneKlasseUeberblick->doActions();
 $schuelerDesKlassenlehrers->doActions();
+$suche->doActions();
 
 // Sammeln der Statusmeldungen
 $statusTxt = "";
@@ -205,9 +211,10 @@ $statusTxt .= $schuelerImportieren->getStatusText();
 $head = "EuLe";
 $menu = new Menu();
 $menuBar = new MenuBar();
+$infoLeiste = new InfoLeiste();
 $menuBar = $menuBar->__toString();
 $leftContent = $menu->__toString();
-
+$infoLeiste = $infoLeiste->__toString();
 
 if ($statusTxt) {
     $statusTxt = "<div id='status'>{$statusTxt}</div>";
@@ -496,11 +503,37 @@ switch ($contentId) {
             $mainContent .= $schuelerDesKlassenlehrers->__toString();
         }
         break;
-        case('suche'):            
-        if (!isset($_POST['suche'])) {
-            $mainContent .= $lehrerSuche->__toString();
+        case('suche_lehrer'):            
+        if (!isset($_POST['suche_lehrer'])) {
+            $mainContent .= $suche->__toString();
         }
         break;
+        case('suche_eltern'):            
+        if (!isset($_POST['suche_eltern'])) {
+            $mainContent .= $suche->__toString();
+        }
+        break;
+        case('suche_termin'):            
+        if (!isset($_POST['suche_termin'])) {
+            $mainContent .= $suche->__toString();
+        }
+        break;
+        case('suche_information'):            
+        if (!isset($_POST['suche_information'])) {
+            $mainContent .= $suche->__toString();
+        }
+        break;
+        case('suche_ergebnis_lehrer'):            
+        if (!isset($_POST['suche_ergebnis_lehrer'])) {
+            $mainContent .= $sucheLehrerUeberblick->__toString();
+        }
+        break;
+        case('sucheLehrer_zu_profil'):            
+        if (!isset($_POST['sucheLehrer_zu_profil'])) {
+            $mainContent .= "hier sollte nun das Profil des Lehrers erscheinen";
+        }
+        break;
+        
 }
 
 
@@ -511,6 +544,7 @@ $mainDoc->setValue("[head]", $head);
 $mainDoc->setValue("[main]", $mainContent);
 $mainDoc->setValue("[top]", $menuBar);
 $mainDoc->setValue("[left]", $leftContent);
+
 
 
 echo $mainDoc;
