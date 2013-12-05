@@ -2,28 +2,29 @@
     <fieldset>
         <legend>Information aendern:</legend>                       
                        
-            Gültigkeitsdatum:<br /> (bis jetzt noch folgendes Eingabeformat: 'YYYY-MM-DD')
+            Gueltigkeitsdatum:<br /> (bis jetzt noch folgendes Eingabeformat: 'YYYY-MM-DD')
             <input type='text' name='gültigkeitsdatum' value='[gültigkeitsdatum]'/><br />
             
             Bezeichnung<br />
             <p>
                 <select name="bezeichnung" size="1">
-                  <option value="Hausaufgabe">Hausaufgabe</option>
-                  <option value="allgemeine Informationen">Allgemeine Informationen</option>
-                  <option value="Sonstiges">Sonstiges</option>
+                  <option value="Hausaufgabe" selected0>Hausaufgabe</option>
+                  <option value="allgemeine Informationen" selected1>Allgemeine Informationen</option>
+                  <option value="Sonstiges" selected2>Sonstiges</option>
                 </select>
             </p>
 			<br />
-            <label for="textfeld">Text/Beschreibung:</label> <br />
-            <textarea name="textfeld" cols="40" rows="10"> 
-   [value]
-</textarea>   <br />             
+             <br />
+             <div>Beschreibung
+            <textarea name="textfeld" cols="40" rows="10">leer</textarea>   <br />             
+             </div>
             
                         
             <input type='submit' name=InfoAendern value='Information Aendern'>
             <input type='hidden' name = 'datenbank' value='Information'>
             <input type='hidden' name = 'benutzerID'  value='[benutzerID]'>
             <input type='hidden' name='contentId' value='[contentId]'>
+            <input type='hidden' name='infoid' value='[infoid]'>
 	
     </fieldset>
 </form>

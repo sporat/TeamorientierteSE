@@ -9,15 +9,17 @@ class Info  {
 	protected $textfeld;
 	protected $gültigkeitsdatum;
     protected $benutzerID;
+    protected $erstellungsdatum;
 	
 
 	// Konstruktor
-	public function __construct($infoid = null, $bezeichnung= "", $textfeld= "", $gültigkeitsdatum="", $benutzerID=null) {
+	public function __construct($infoid = null, $bezeichnung= "", $textfeld= "", $gültigkeitsdatum="", $benutzerID=null, $erstellungsdatum="") {
 		$this->infoid = $infoid;
 		$this->bezeichnung = $bezeichnung;
 		$this->textfeld = $textfeld;
 		$this->gültigkeitsdatum = $gültigkeitsdatum;
 		$this->benutzerID = $benutzerID;
+                $this->erstellungsdatum = $erstellungsdatum;
 		
                 
 	}
@@ -53,7 +55,13 @@ class Info  {
 	public function getGültigkeitsdatum() {
 		return $this->gültigkeitsdatum;	
 	}
+	public function setErstellungsdatum($erstellungsdatum) {
+		$this->erstellungsdatum = $erstellungsdatum;
+	} 
 	
+	public function getErstellungsdatum() {
+		return $this->erstellungsdatum;	
+	}
 	public function setBenutzerID($benutzerID) {
 		$this->benutzerID = $benutzerID;
 	} 

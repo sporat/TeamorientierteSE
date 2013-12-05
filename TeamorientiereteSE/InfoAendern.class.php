@@ -8,13 +8,14 @@ class InfoAendern {
 
 	public static $CONTENT_ID = "infoAendern";
 	private $information;
-        private $infosql;
 	private $statusText;
-	private $submitKey = "bearbeitetenInfoBestaetigen";
+	private $submitKey = "InfoAendern";
 	private $infoid;
 	private $bezeichnung;
 	private $benutzerid;
 	private $gültigkeitsdatum;
+        private $text;
+        private $infosafe;
 	
 	public function getInfo() {
 		return $this->information;
@@ -30,16 +31,15 @@ class InfoAendern {
 		if (array_key_exists($this->submitKey, $_REQUEST)) {
 			
 			// benötigte Werte aus $_REQUEST-Array auslesen und in lokaler Variable zwischenspeichern
-			$infoid = $_POST["infoid"];
-			$bezeichnung = $_POST["bezeichnung"];
-			$benutzerid = $_POST["benutzerid"];
-			$gültigkeitsdatum = $_POST["gültigkeitsdatum"];
-			
-						
+			$this->infoid = $_POST["infoid"];
+			$this->bezeichnung = $_POST["bezeichnung"];
+			$this->gültigkeitsdatum = $_POST["gültigkeitsdatum"];
+			$this->text = $_POST["textfeld"];
+			$benutzerid = User::getInstance()->getBenutzerId();	
 			// neues Model instanziieren und das Laden aus der DB verlassen. Falls dieser Artikel noch
 			// nicht vorhanden ist und das Laden fehl schlägt, Artikel neu erstellen lassen.
 			$this->information = new Info();
-                        $this->schuelersafe = new SchuelerSQL();
+                        $this->infosafe = new InfoSQL();
 				 
 			//if (!$this->schueler->laden($kindid)) {
 				
@@ -47,18 +47,20 @@ class InfoAendern {
 			//}
 		
 			// Das Model zum Speichern in die DB veranlassen
-			if ($this->schuelersafe->speichern($kindid, $name, $vorname, $geburtsdatum, $strasse, $ort, $plz, $jahrgangsstufe)) 
+			if ($this->infosafe->aendern($this->infoid, $this->gültigkeitsdatum, $this->text, $this->bezeichnung, $benutzerid)) 
 			{
-				// ggf. Erfolgsmeldung generieren
-				$this->statusText = "Benutzer ('".$name."', '".$vorname."' wurde erfolgreich geändert!";
+				$_REQUEST["contentId"] = "info_aendern_klasse";
+              
+// ggf. Erfolgsmeldung generieren
+				//$this->statusText = "Information '".$this->bezeichnung."' wurde erfolgreich geändert!";
 
 			} else {
 
 				// ggf. Fehlermeldung generieren
-				$this->statusText = "Benutzer ('".$name."', '".$vorname."' wurde nicht erfolgreich geändert!";
+				$this->statusText = "Information '".$this->bezeichunung."' wurde nicht erfolgreich geändert!";
 
 				// Erneut diese Klasse zur Anzeige verwenden
-				$_REQUEST["contentId"] = self::$CONTENT_ID;
+				$_REQUEST["contentId"] = "information_aendern";
 			}
 
 			/*
@@ -75,8 +77,8 @@ class InfoAendern {
 		// Prüfen ob ArtikelNr zum Laden des Models übergeben wurde
 		elseif (array_key_exists("id", $_REQUEST)) {
 			// Model instanziieren und laden
-			$this->schueler = new Schueler();
-			$this->schueler->laden($_REQUEST["id"]);
+			$this->infosafe = new InfoSQL();
+			$this->infosafe->laden($_REQUEST["id"]);
 		}
 	}
 
@@ -92,21 +94,27 @@ class InfoAendern {
 	 */
 	public function __toString() {
 		// Erstellen des Login-Formulars mit Hilfe des zugehörigen Templates
-		$form = new Template("SchuelerAendern.tmpl.html");
+		$form = new Template("InfoAendern.tmpl.html");
 
 		// Daten des Models eintragen
-		$form->setValue("[kindid]", $this->schueler->getKindId());
-		$form->setValue("[vorname]", $this->schueler->getVorname());
-		$form->setValue("[name]", $this->schueler->getName());
-		$form->setValue("[geburtsdatum]", $this->schueler->getGeburtsdatum());
-		$form->setValue("[strasse]", $this->schueler->getStrasse());
-		$form->setValue("[plz]", $this->schueler->getPLZ());
-		$form->setValue("[ort]", $this->schueler->getOrt());
-		$form->setValue("[jahrgangsstufe]", $this->schueler->getJahrgangsstufe());
-		
+               if ($this->infosafe->getBezeichnung()=="Hausaufgabe"){
+                    $form->setValue("selected0",'selected'); 
+                    }
+                elseif ($this->infosafe->getBezeichnung()=="allgemeine Informationen"){
+                    $form->setValue("selected1",'selected'); 
+                    }
+                elseif ($this->infosafe->getBezeichnung()=="Sonstiges")
+                {
+                    $form->setValue("selected2",'selected');
+                }
+                
+		$form->setValue("[infoid]", $_REQUEST["id"]);
+		$form->setValue("[gültigkeitsdatum]", $this->infosafe->getGültigkeitsdatum());
+		$form->setValue('leer', $this->infosafe->getText());
+				
 		// Daten zur Ausführungssteuerung übergeben
-		$form->setValue("[contentId]", SchuelerUeberblick::$CONTENT_ID);
-		$form->setValue("[submitKey]", $this->submitKey);
+		$form->setValue("[contentId]", "info_aendern_klasse");
+		
 
 		// erstelltes Formular zurück geben
 		return $form->__toString();

@@ -12,14 +12,19 @@ class InfoBenutzerListe {
 		$this->info = array();
 		
 		$statement = new DBStatement(DBConnection::getInstance());
-                $benutzerId = User::getInstance()->getBenutzerId();              
-		$statement->executeQuery("Select * from Information where benutzerid='$benutzerId'");
+                if(User::getInstance()->getBenutzerId()){
+                $benutzerid= User::getInstance()->getBenutzerId();}
+                else{
+                    $benutzerid=1;
+                    
+                }
+		$statement->executeQuery("Select * from Information where benutzerid= ".$benutzerid."");
 		while ($row = $statement->getNextRow()) {
-			$info = new Info();
-			$info->laden($row["infoid"]);
+			$infosql = new InfoSQL();
+			$infosql->laden($row["InfoID"]);
 			
 			// Mit array_push werden neue Werte am Ende des Arrays angefügt 
-			array_push($this->info, $info);
+			array_push($this->info, $infosql);
 		}
 	}
 

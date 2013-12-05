@@ -41,7 +41,7 @@ class SucheLehrerListe {
 		}
                         }
                         //vorname leer
-                        else if(empty($_POST['vorname']) && !empty($_POST['nachname']) && !empty($_POST['email']))
+                        else if(empty($_POST['vorname']) && !empty($_POST['nachname']) && !empty($_POST['email'])) {
                             $nachname = $_POST['nachname'];
                             $email = $_POST['email'];
                             //sql3                      
@@ -91,7 +91,7 @@ class SucheLehrerListe {
                             $nachname = $_POST['nachname'];
                             //sql2
                         }
-		
+                }
 	}
 
 	public function getLehrer() {
