@@ -57,6 +57,30 @@
 			}
 			return false;
 		}
+                
+                public function ladenSuche($benutzerid) {
+			$statement = new DBStatement(DBConnection::getInstance());
+                        //echo $benutzerid;
+			$statement->executeQuery("SELECT * FROM `benutzer` where rolle = 'Lehrer' and BenutzerID = '$benutzerid'");
+			if ($row = $statement->getNextRow()) {
+				$this->benutzerid = $benutzerid;
+				$this->benutzername = $row["Benutzername"];
+				$this->vorname = $row["Vorname"];
+				$this->name = $row["Name"];
+				$this->email = $row["Email"];
+				$this->telefon = $row["Telefon"];
+                                $this->passwort = $row["Passwort"];
+				//$this->raum = $row["Raum"];
+				$this->rolle = $row["Rolle"];
+                                //$this->sprechstundeTag = $row["Sprechstunde_Tag"];
+                                //$this->sprechstundeZeit = $row["Sprechstunde_Uhrzeit"];
+                                //$this->funktion = $row["Funktion"];
+                                //$this->klassenlehrer = $row["Klassenlehrer"];
+				return true;
+			}
+			return false;
+		}
+                
                 public function load($benutzerid) {
 			$statement = new DBStatement(DBConnection::getInstance());
                         

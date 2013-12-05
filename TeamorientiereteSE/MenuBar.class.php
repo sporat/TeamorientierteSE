@@ -7,16 +7,32 @@
 
             //$userLogout= new UserLogout();
 
-            $menuBar = "<div id='menueBar'>";
-            $menuBar =        "<ul id ='Navigation'>";
-            $menuBar .=     "<li><a href='index.php?contentId='>Profile</a></li>";
-            $menuBar .=     "<li><a href='index.php?contentId=suche'>Suche</a></li>";
-            $menuBar .=     "<li><a href='index.php?contentId='>Postfach</a></li>";
-            $menuBar .=     "<li><a href='index.php?contentId='>Beispiel1</a></li>";
-            $menuBar .=     "<li><a href='index.php?contentId='>Beispiel2</a></li>";
-            $menuBar .= "</ul>";   
+            $menuBar = "<div id='Navigation'><ul>";
+      //      $menuBar =	"<ul id ='Navigation'>";
+			$menuBar .="	<li>Profile";
+			$menuBar .="		<ul>";
+                        $menuBar .="			<li><a href='index.php?contentId='>Lehrerprofile</a></li>";
+			$menuBar .="     		<li><a href='index.php?contentId='>Schulprofil</a></li>";
+			$menuBar .="		</ul>";
+			$menuBar .="	</li>";
+			$menuBar .="	<li>Suche";
+			$menuBar .="		<ul>";			
+                        $menuBar .="			<li><a href='index.php?contentId=suche_lehrer'>nach Lehrern</a></li>";
+			$menuBar .="			<li><a href='index.php?contentId=suche_eltern'>nach Eltern</a></li>";
+			$menuBar .="			<li><a href='index.php?contentId=suche_information'>nach Informationen</a></li>";
+                        $menuBar .="			<li><a href='index.php?contentId=suche_termin'>nach Terminen</a></li>";
+			$menuBar .="		</ul>";
+			$menuBar .="	</li>";
+			$menuBar .="	<li>Postfach";
+			$menuBar .="		<ul>";
+                        $menuBar .="			<li><a href='index.php?contentId='>neue Nachrichten</a></li>";
+                        $menuBar .="			<li><a href='index.php?contentId='>Posteingang</a></li>";
+			$menuBar .="			<li><a href='index.php?contentId='>gesendete Nachrichten</a></li>";
+			$menuBar .="		</ul>";
+			$menuBar .="	</li>";
+            $menuBar .="</ul>";   
            
-            $menuBar .= "</div>";
+            $menuBar .="</div>";
             
             return $menuBar;
         }
